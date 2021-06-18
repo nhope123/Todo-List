@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
+import {capitalize, addTask} from './helper'
 
 const initialState = {
   creation_date: '',
@@ -6,10 +7,7 @@ const initialState = {
   todo_list:[],
 }
 
-export const capitalize = aString => {
-  return (aString.length > 0)?
-                    (aString[0].toUpperCase()+ aString.slice(1,)): aString
-}
+
 
 const listSlice = createSlice({
   name: 'list',
@@ -26,9 +24,10 @@ const listSlice = createSlice({
     },
     updateTask: {
       reducer: (state,action)=>{
-        state.todo_list = [...state.todo_list,action.payload]
+        state.todo_list = addTask(state.todo_list,action.payload)
       },
       prepare: (value)=>{
+        console.log(JSON.stringify(value));
         return {payload: value};
       },
     }

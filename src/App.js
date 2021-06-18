@@ -18,13 +18,14 @@ class App extends Component {
   static propTypes = {
     creation_date: PropTypes.string,
     inputChange: PropTypes.func,
+    task_list: PropTypes.array,
 
   }
 
   render() {
-  /*  const createdlist = this.props.todo_list.map((item) => {
-
-  })*/
+   const createdlist = this.props.task_list.map((item,index) => {
+     return (<ListItem key={index} {...item} />);
+  })
     return (
       <div className={'container-fluid d-flex flex-column justify-content-start align-items-center bg-info min-vh-100 '} >
         <div id={'item-list'} className={'container border border-1 border-primary border-radius-6 m-5 p-0 '}  >
@@ -36,8 +37,12 @@ class App extends Component {
                    placeholder={'title'} onChange={(event) =>{this.props.inputChange(['title',event.target.value])}}/>
           </div >
           {/* Todo list */}
+          <div >
+            {createdlist}
+          </div >
 
-            <ListItem {...{task:'cook food',key:1}} />
+
+            <ListItem autoFocus {...{task:'',id:'',complete:''}} />
 
           {/* Item input *}
           <div >
@@ -53,6 +58,7 @@ class App extends Component {
 const mapStateToProps = (state) => ({
   creation_date: state.todolist.creation_date,
   title: state.todolist.title,
+  task_list: state.todolist.todo_list,
 
 })
 
