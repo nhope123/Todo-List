@@ -6,31 +6,37 @@ const initialState = {
   todo_list:[],
 }
 
+export const capitalize = aString => {
+  return (aString.length > 0)?
+                    (aString[0].toUpperCase()+ aString.slice(1,)): aString
+}
+
 const listSlice = createSlice({
   name: 'list',
   initialState,
   reducers: {
-    creationDate: {
-      reducer: (state,action)=>{
-        state.creation_date = action.payload
-      },
-      prepare: (value) =>{
-        return {payload: value};
-      },
-    },
     inputChange: {
       reducer: (state,action) =>{
-        state.title = (action.payload.length < 25)? action.payload : state.title 
+        state.[action.payload[0]] = (action.payload[0] === 'title' && action.payload[1].length < 25)?
+                                      capitalize(action.payload[1]) : action.payload[1]
       },
       prepare: value =>{
         return {payload: value};
       },
     },
+    updateTask: {
+      reducer: (state,action)=>{
+        state.todo_list = [...state.todo_list,action.payload]
+      },
+      prepare: (value)=>{
+        return {payload: value};
+      },
+    }
   },
   extraReducers:{
 
   }
 })
 
-export const {creationDate,inputChange} = listSlice.actions;
+export const {inputChange,updateTask} = listSlice.actions;
 export default listSlice.reducer;

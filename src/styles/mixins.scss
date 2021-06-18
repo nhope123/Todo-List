@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Knewave&family=Roboto&family=Satisfy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+/*
+font-family: 'Knewave', cursive;
+font-family: 'Roboto', sans-serif;
+font-family: 'Satisfy', cursive;
+font-family: 'Fredoka One', cursive;
+font-family: 'Pacifico', cursive;
+*/
+
+
+@mixin satisfyFont() {
+  font-family: 'Satisfy', cursive;
+}
+@mixin displayPosition($display, $position){
+  display: $display;
+  position: $position;
+}
+
+@mixin dimension($width,$height:auto){
+  width: $width;
+  height: $height;
+}
+
+@mixin boxShadow($value){
+  -webkit-box-shadow: $value;
+  -moz-box-shadow: $value;
+  box-shadow: $value;
+}
+
+// Display flex direction, justify, and align attributes
+@mixin flexAttribute($direction,$justify,$align) {
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}

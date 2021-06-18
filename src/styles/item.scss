@@ -1,0 +1,47 @@
+@import './mixins.scss';
+
+#item-list{
+  max-width: 550px;
+  min-height: 80vh;
+  border-radius: 15px;
+  .header{
+    @include dimension(100%,45px);
+    @include boxShadow(0px 2px 5px rgba(0,0,0,0.2));
+    line-height: 2.5;
+
+    border-bottom: 0px solid red;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+
+  }
+  #item-title{
+    input{
+      font-size: 22px;
+      font-weight: bold;
+      background-color: rgba(0,0,0,0);
+      border: none;
+      outline: none;
+    }
+    input:focus{
+      border-bottom: 2px solid #e0e0e0;
+    }
+  }
+  .task{
+    input[type='checkbox']{
+      @include dimension(17px,17px);
+      cursor: pointer;
+      
+    }
+    input[type='text']{
+      font-size: 13px;
+      @include dimension(100%);
+      background-color: rgba(0,0,0,0);
+      border: none;
+      outline: none;
+    }
+    input[type='text']:focus{
+      //border-bottom: 2px solid #e0e0e0;
+      border:none;
+    }
+  }
+}
