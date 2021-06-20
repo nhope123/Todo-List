@@ -20,7 +20,7 @@ class ListItem extends Component{
     updateTask: PropTypes.func,
   }
 
-  /*componentDidMount(){
+  componentDidMount(){
     if(this.props.id !== ''){
       console.log(`componentDidMount: id- ${this.props.id}, complete- ${this.props.complete}, task-${this.props.task}`);
       this.setState({
@@ -31,7 +31,7 @@ class ListItem extends Component{
     }else{
       this.setState({id:uuidv4()})
     }
-  }*/
+  }
 
   /* Update the checkbox value */
   setChecked = e =>{
@@ -43,7 +43,7 @@ class ListItem extends Component{
   }
   submitChanges = e =>{
     if(e.charCode === 13 && this.state.task.length >= 1){
-      console.log('in kkeypress');
+      //console.log('in kkeypress');
       this.props.updateTask(this.state)
       this.setState({id: uuidv4(),complete:false,task:'',})
     }
@@ -74,7 +74,8 @@ class ListItem extends Component{
           {/* Completed task checkbox */}
           <div className={'col-1 d-flex justify-content-evenly align-items-center '} >
             <input tabIndex={'0'} type={'checkbox'} name={'complete'}
-            checked={this.complete} title={'Task completed'}
+            checked={this.state.complete} title={'Task completed'}
+            style={(this.state.task.length >= 1)? {visibility: 'visible'} : {visibility: 'hidden'} }
             onChange={(event) =>{this.changeTask(event.target.name,event.target.checked)}} />
           </div >
 
@@ -82,8 +83,10 @@ class ListItem extends Component{
           <div className={'col-9 p-0 mx-0 '} >
             <input  type={'text'} tabIndex={'0'} value={this.state.task}
                     name={'task'} placeholder={'Task'} className={'fs-6'}
-                    title={'Input task'}
-                    onChange={(event) =>{this.changeTask(event.target.name,event.target.value)}}/>
+                    title={'Input task'} style={(this.state.complete)? {textDecoration: 'line-through'}:{textDecoration: 'none'}}
+                    onChange={(event) =>{this.changeTask(event.target.name,event.target.value)}}
+                    onBlur={event => {this.submitChanges(event)}}
+                    />
           </div >
 
 

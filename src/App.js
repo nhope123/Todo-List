@@ -10,10 +10,20 @@ import ListItem from './components/list-item'
 
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      tasks: this.props.task_list,
+    }
+  }
 
   componentDidMount(){
     const time = moment().format('ddd, Do MMMM, YYYY')
     this.props.inputChange(['creation_date',time])
+  }
+  shouldComponentUpdate(nextProps,nextState){
+    //console.log(`new list: ${JSON.stringify(nextProps.task_list)} -- old list: ${JSON.stringify(this.props.task_list)} , equal: ${nextProps.task_list !== this.props.task_list}`);
+    return this.state.tasks !== this.props.task_list
   }
   static propTypes = {
     creation_date: PropTypes.string,
@@ -23,6 +33,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(JSON.stringify(this.props.task_list));
    const createdlist = this.props.task_list.map((item,index) => {
      return (<ListItem key={index} {...item} />);
   })
@@ -41,7 +52,13 @@ class App extends Component {
 
           {/* Todo list */}
           <div >
-            {createdlist}
+            { createdlist }
+            {/*
+
+              this.props.task_list.map((item,index) => {
+                return (<ListItem key={index} {...item} />);
+              })
+            */}
           </div >
 
 

@@ -27,7 +27,7 @@ const listSlice = createSlice({
         state.todo_list = addTask(state.todo_list,action.payload)
       },
       prepare: (value)=>{
-        console.log(JSON.stringify(value));
+        //console.log(JSON.stringify(value));
         return {payload: value};
       },
     }

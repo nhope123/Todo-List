@@ -1,3 +1,4 @@
+import {v4 as uuidv4} from 'uuid'
 
 export const capitalize = aString => {
   return (aString.length > 0)?
@@ -6,19 +7,24 @@ export const capitalize = aString => {
 
 
 export const addTask = (taskList, aTask) =>{
-
+  let task_to_add = aTask
   let dupilcate = false
   let list;
 
   if (taskList.length >= 1) {
+
     list = taskList.map((item) => {
-                            if (item.id === aTask.id) {
+                            if (item.id === task_to_add.id) {
                               dupilcate = true;
-                              return aTask;
+                              task_to_add.id = uuidv4();
+                              return task_to_add;
                               } else { return item } })
-    if (dupilcate === false) { list.push(aTask) }
+                    if (dupilcate === false) {
+                      task_to_add.id = uuidv4();
+                      list.push(task_to_add)
+                    }
   } else {
-    list = [aTask]
+    list = [task_to_add]
   }
 
 
@@ -28,7 +34,7 @@ export const addTask = (taskList, aTask) =>{
    /*=  ?   : (dupilcate === false)? [...taskList, aTask]:
                                               [aTask]*/
 
-  console.log(`completed-list: ${JSON.stringify(list)}`);
+  //console.log(`completed-list: ${JSON.stringify(list)}`);
   return list
   //console.log(`item-id: ${item.id},  add-id: ${aTask.id}`);
   /*clearedList.push(aTask)
