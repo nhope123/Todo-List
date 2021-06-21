@@ -1,11 +1,26 @@
 import {v4 as uuidv4} from 'uuid'
 
+/**
+* @function capitalize
+* @description This function takes a string an return a a string with the first
+* letter capitalized.
+*
+* @param {string} aString  The string to be capitalized
+* @return {string} A capitalized string 
+*/
 export const capitalize = aString => {
   return (aString.length > 0)?
                     (aString[0].toUpperCase()+ aString.slice(1,)): aString
 }
 
-
+/**
+* @function addTask
+* @description This function add or update an existing task list with a task.
+*
+* @param {object[]} taskList A collection of tasks objects
+* @param {object} task A task object containing id, complete and task
+* @return {object[]} An updated list with added task
+*/
 export const addTask = (taskList, aTask) =>{
   let task_to_add = aTask
   let dupilcate = false
