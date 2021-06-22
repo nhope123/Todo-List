@@ -37,6 +37,8 @@ class App extends Component {
    const createdlist = this.props.task_list.map((item,index) => {
      return (<ListItem key={index} {...item} />);
   })
+JSON.stringify()
+
     return (
       <div className={'container-fluid d-flex flex-column justify-content-start align-items-center bg-info min-vh-100 '} >
         <div id={'item-list'} className={'container border border-1 border-primary border-radius-6 m-5 p-0 '}  >
