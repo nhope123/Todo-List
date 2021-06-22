@@ -1,13 +1,19 @@
 import {createSlice} from '@reduxjs/toolkit'
 import {capitalize, addTask} from './helper'
 
+/**
+* @constant
+* @description Initial state of the list reducer
+* @type {object}
+* @property {string} creation_date - Date the Todo list was created
+* @property {string} title - The title of the Todo list
+* @property {object[]} todo_list - An array of task objects
+*/
 const initialState = {
   creation_date: '',
   title: '',
   todo_list:[],
 }
-
-
 
 
 const listSlice = createSlice({
@@ -23,6 +29,8 @@ const listSlice = createSlice({
     * the state to be updated (creation_date or title state).
     * @property {string} value[1] -The second element is a string value of a title
     * or the creation date of the list.
+    * @example
+    * inputChange(['creation_date','Thur, 14th Jan, 2021']);
     */
     inputChange: {
       reducer: (state,action) =>{
@@ -41,6 +49,8 @@ const listSlice = createSlice({
     * @property {number} id - A unique uuid number.
     * @property {bool} complete - The task completion status.
     * @property {string} task - The task to be added to the task list.
+    * @example
+    * updateTask({id: 2362, complete: true, task: 'Read a book'})
     */
     updateTask: {
       reducer: (state,action)=>{
