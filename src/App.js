@@ -37,14 +37,14 @@ class App extends Component {
    const createdlist = this.props.task_list.map((item,index) => {
      return (<ListItem key={index} {...item} />);
   })
-JSON.stringify()
+console.log(JSON.stringify(this.props.task_list));
 
     return (
       <div className={'container-fluid d-flex flex-column justify-content-start align-items-center bg-info min-vh-100 '} >
-        <div id={'item-list'} className={'container border border-1 border-primary border-radius-6 m-5 p-0 '}  >
+        <div id={'item-list'} className={'container border border-1 border-primary border-radius-6 m-5 p-0 bg-white'}  >
 
           {/* Todo date header */}
-          <div className={'header text-center align-middle '}>{this.props.creation_date}</div >
+          <div className={'header text-center align-middle text-black'}>{this.props.creation_date}</div >
 
           {/* Todo title */}
           <div id={'item-title'} className={'w-100 mt-3 px-4 py-2'} >
