@@ -6,7 +6,7 @@ import {v4 as uuidv4} from 'uuid'
 * letter capitalized.
 *
 * @param {string} aString  The string to be capitalized
-* @return {string} A capitalized string 
+* @return {string} A capitalized string
 */
 export const capitalize = aString => {
   return (aString.length > 0)?
@@ -17,9 +17,9 @@ export const capitalize = aString => {
 * @function addTask
 * @description This function add or update an existing task list with a task.
 *
-* @param {object[]} taskList A collection of tasks objects
-* @param {object} task A task object containing id, complete and task
-* @return {object[]} An updated list with added task
+* @param {object[]} taskList - A collection of tasks objects.
+* @param {object} task - A task object containing id, complete and task.
+* @return {object[]} An updated list with added task.
 */
 export const addTask = (taskList, aTask) =>{
   let task_to_add = aTask
@@ -41,17 +41,19 @@ export const addTask = (taskList, aTask) =>{
   } else {
     list = [task_to_add]
   }
-
-
-
-
-
-   /*=  ?   : (dupilcate === false)? [...taskList, aTask]:
-                                              [aTask]*/
-
-  //console.log(`completed-list: ${JSON.stringify(list)}`);
   return list
-  //console.log(`item-id: ${item.id},  add-id: ${aTask.id}`);
-  /*clearedList.push(aTask)
-  return clearedList*/
+
+}
+
+/**
+* @function removeTask
+* @description This function remove a task with the given task id.
+* @param {object[]} taskList A collection of tasks objects.
+* @param {string} taskId -The id of the task to be removed.
+* @return {object[]} An updated list with added task.
+*/
+export const removeTask = (taskList,taskId) =>{
+  return taskList.filter((item) => {
+    return item.id !== taskId
+  })
 }
