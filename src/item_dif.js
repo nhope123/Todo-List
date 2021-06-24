@@ -8,8 +8,8 @@ class ListItem extends Component {
 
     this.state = (this.props.id !== '')?
                 ({id: this.props.id, complete: this.props.complete,
-                  task: this.props.task, user_input: false}):
-                ({id: uuidv4(), complete:false,task:'',user_input: true})
+                  task: this.props.task, user_input: false, delete: false}):
+                ({id: uuidv4(), complete:false,task:'',user_input: true, delete:false})
 
     this.setChecked = this.setChecked.bind(this)
     this.changeTask = this.changeTask.bind(this)
@@ -39,6 +39,9 @@ class ListItem extends Component {
   changeElement = () =>{
     this.setState({user_input: true})
   }
+  deleteItem = ()=>{
+    this.setState({delete: true})
+  }
 
 /*
   bug: need an item for updating the task and a separate item for creatingthe task
@@ -53,7 +56,7 @@ class ListItem extends Component {
   render() {
   //  console.log(JSON.stringify(this.state));
     return (
-      <div className={' task container-fluid  rounded-pill  w-100'} >
+      <div id={this.state.id} className={ `task container-fluid  rounded-pill  w-100 ${(!this.state.delete)?'d-block':'d-none'}`} >
 
       {/* Task cotainer */}
         <form className={'row d-flex justify-content-center py-0 px-2 w-100'}
@@ -75,7 +78,7 @@ class ListItem extends Component {
                     name={'task'} placeholder={'Task'} className={'fs-6'}
                     title={'Input task'} style={(this.state.complete)? {textDecoration: 'line-through'}:{textDecoration: 'none'}}
                     onChange={(event) =>{this.changeTask(event.target.name,event.target.value)}}
-                    onBlur={event => this.submitChanges(event)} autoFocus />):
+                    onBlur={event => this.submitChanges(event)}  />):
               (<div tabIndex={'0'} onClick={this.changeElement}>{this.state.task} </div >)
                   }
           </div >
@@ -85,7 +88,7 @@ class ListItem extends Component {
             <span role={'button'}
                   style={(this.state.task.length >= 1 || !this.state.user_input)? {visibility: 'visible'} :
                         {visibility: 'hidden'} }
-                  onClick={()=>{ this.props.callback('remove',this.state.id)}}
+                  onClick={this.deleteItem}
                   >&#65049;
             </span >
           </div >

@@ -18,10 +18,6 @@ class App extends Component {
     this.updateTitle = this.updateTitle.bind(this)
   }
 
-  shouldComponentUpdate(nextProps,nextState){
-    return this.state.task_list !== nextState.task_list
-  }
-
   updateTask = (process,value) =>{
     console.log(`value: ${JSON.stringify(value)}`);
     //console.log(`value: ${JSON.stringify(addTask(this.state.task_list,value))}`);
@@ -30,6 +26,7 @@ class App extends Component {
                               addTask(this.state.task_list,value):
                               removeTask(this.state.task_list,value)
                             })
+    
   }
   updateTitle = value =>{
     this.setState({title: value})
