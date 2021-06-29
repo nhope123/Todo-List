@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {v4 as uuidv4} from 'uuid'
-import {capitalize} from './redux/helper'
+import {capitalize} from '../redux/helper'
 
 class ListItem extends Component {
   constructor(props) {

@@ -5,18 +5,19 @@
   min-height: 80vh;
   border-radius: 15px;
   .header{
-    @include dimension(100%,45px);
+    @include dimension(100%);
     @include boxShadow(0px 2px 5px rgba(0,0,0,0.2));
-    line-height: 2.5;
+    line-height: 2.0;
 
     border-bottom: 0px solid red;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
 
   }
+
   #item-title{
     input{
-      font-size: 22px;
+      //font-size: 1.5em;
       font-weight: bold;
       background-color: rgba(0,0,0,0);
       border: none;
@@ -26,11 +27,15 @@
       border-bottom: 2px solid #e0e0e0;
     }
   }
+
+  #date{
+    font-size: 0.9em;
+  }
   .task{
     input[type='checkbox']{
       @include dimension(17px,17px);
       cursor: pointer;
-      
+
     }
     input[type='text']{
       font-size: 13px;

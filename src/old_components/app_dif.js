@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import moment from 'moment'
 
 import ListItem from './item_dif'
-import {addTask, removeTask} from './redux/helper'
+import {addTask, removeTask} from '../redux/helper'
 
 class App extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class App extends Component {
                               addTask(this.state.task_list,value):
                               removeTask(this.state.task_list,value)
                             })
-    
+
   }
   updateTitle = value =>{
     this.setState({title: value})

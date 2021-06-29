@@ -4,11 +4,11 @@ import store from './redux/store';
 import {Provider} from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 
-//import './index.css';
+import './styles/index.css';
 import './styles/item.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import TaskList from './components/task';
+import TaskList from './components/tasklist';
 //import App from './App';
 //import App from './app_dif'
 
