@@ -1,19 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import App from './App';
-import App from './app_dif'
-import store from './redux/store'
-import {Provider} from 'react-redux'
+import store from './redux/store';
+import {Provider} from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 
-import './index.css';
-import './styles/item.scss'
+//import './index.css';
+import './styles/item.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import TaskList from './components/task';
+//import App from './App';
+//import App from './app_dif'
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store} >
-      <App />
+      <TaskList />
     </Provider >
   </React.StrictMode>,
   document.getElementById('root')
