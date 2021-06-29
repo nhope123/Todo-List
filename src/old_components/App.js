@@ -23,6 +23,7 @@ class App extends Component {
   }
   shouldComponentUpdate(nextProps,nextState){
     //console.log(`new list: ${JSON.stringify(nextProps.task_list)} -- old list: ${JSON.stringify(this.props.task_list)} , equal: ${nextProps.task_list !== this.props.task_list}`);
+    console.log(`should update ${(this.state.tasks !== this.props.task_list)}`);
     return this.state.tasks !== this.props.task_list
   }
   static propTypes = {
