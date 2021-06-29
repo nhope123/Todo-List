@@ -26,6 +26,8 @@ export const addTask = (taskList, aTask) =>{
   let dupilcate = false
   let list;
 
+  //console.log(`task list: ${JSON.stringify(taskList)} \n new task: ${JSON.stringify(aTask)}`);
+
   if (taskList.length >= 1) {
 
     list = taskList.map((item) => {
@@ -41,6 +43,7 @@ export const addTask = (taskList, aTask) =>{
   } else {
     list = [task_to_add]
   }
+  //console.log(`task update: ${JSON.stringify(list)}`)
   return list
 
 }

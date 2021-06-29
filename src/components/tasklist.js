@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import {v4 as uuidv4} from 'uuid';
 
-import {capitalize} from '../redux/helper';
-import ListItem from '../old_components/item_dif';
+import Task from './task';
+import {capitalize, addTask, removeTask} from '../redux/helper';
+//import ListItem from '../old_components/item_dif';
 
 class TaskList extends Component {
   constructor(props) {
@@ -14,6 +16,7 @@ class TaskList extends Component {
       task_list: [],
     }
     this.updateTitle = this.updateTitle.bind(this);
+    this.updateTask = this.updateTask.bind(this);
   }
 
   /**
@@ -32,13 +35,18 @@ class TaskList extends Component {
   * @param {object} value
   *
   */
-  updateTask = (value) =>{
-
+  updateTask = (process,value) =>{
+    if(process === 'add'){
+      this.setState({task_list: addTask(this.state.task_list,value)});
+    }
+    else if (process === 'remove') {
+      this.setState({task_list: removeTask(this.state.task_list,value)});
+    }
   }
 
   render() {
     const createdlist = this.state.task_list.map((item,index) => {
-      return (<ListItem key={index} {...item} callback={this.updateTask} new_input={false} />);
+      return (<Task key={index} {...item} callback={this.updateTask} user_input={false} new_input={false}/>);
     })
 
     return (
@@ -60,7 +68,7 @@ class TaskList extends Component {
           </div >
 
           {/* Intial input task */}
-          <ListItem autoFocus {...{task:'',id:'',complete: false,callback: this.updateTask,new_input: true}} />
+          <Task autoFocus {...{id: uuidv4(), complete: false, task:'', user_input: true, callback: this.updateTask, new_input: true}} />
 
 
         </div >
