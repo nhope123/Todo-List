@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 
+import {v4 as uuidv4} from 'uuid';
+
 
 import { capitalize } from '../redux/helper';
 
@@ -17,12 +19,20 @@ class Task extends Component {
       complete: this.props.complete,
       task: this.props.task,
       user_input: this.props.user_input,
-      //delete: this.props.delete,
+      delete: this.props.delete,
     }
 
-    this.changeTask = this.changeTask.bind(this)
-    this.submitChanges = this.submitChanges.bind(this)
-    this.changeElement = this.changeElement.bind(this)
+  }
+
+  shouldComponentUpdate(nextProps,nextState){
+    if(this.props.task !== nextProps.task){
+      return true;
+    }
+    if(this.state.task !== nextState.task){
+      return true;
+    }
+
+    return false;
   }
 
   /**
@@ -30,8 +40,9 @@ class Task extends Component {
   * @description This function updates the task according to user input.
   * @param {string} task - The update task string to a maxt length 0f 20 chars.  *
   */
-  changeTask = task =>{
-    if(task.length < 30) this.setState({ task: capitalize(task) })
+  changeTask = event =>{
+    if (event.charCode === 13) { this.submitChanges(event,'add')  }
+    else if(event.target.value.length < 30) this.setState({ task: capitalize(event.target.value) })
   }
 
   /**
@@ -40,24 +51,25 @@ class Task extends Component {
   * @param {object} event - The element action listener event.
   * @param {string} process - A string of value 'add' or 'remove' to update the task list.
   */
-  submitChanges = (event, process) =>{
-  /*  console.log(`${event.target.name} ${ (event.target.name === 'complete')?
-                        event.target.checked: this.state.task}`); */
+  submitChanges = async (event, process) =>{
 
-    if ((event.charCode === 13 && this.state.task.length >= 1 ) ) {
+    if ((event.charCode === 13 || process === 'add' || process === 'remove') && this.state.task.length >= 1  ) {
       if(process === 'remove'){
-        this.props.callback(process,this.state.id)
-      }else {
-        this.props.callback(process,{
-          ...this.state,
-          [event.target.name]: (event.target.name === 'complete')?
-                              event.target.checked: this.state.task,
-          user_input: false,
-        })
+        await this.props.callback(process,this.state.id);
+
+      }
+      else {
+
+        await  this.props.callback(process,{
+            ...this.state,
+            [event.target.name]: (event.target.name === 'complete')?
+                                event.target.checked: this.state.task,
+            user_input: false,
+        });
       }
       (!this.props.new_input)?
-      (this.setState({id: this.state.id,complete: this.state.complete,task:this.state.task,user_input: this.props.user_input,})):
-      (this.setState({id: '',complete: '',task:'',user_input: true}))
+      (this.setState({id: this.props.id,complete: this.props.complete,task:this.props.task,user_input: this.props.user_input,})):
+      (this.setState({id: uuidv4(),complete: false, task:'',user_input: true}))
     }
   }
 
@@ -66,21 +78,29 @@ class Task extends Component {
   }
 
   render() {
-    console.log(`state: ${JSON.stringify(this.state)}`);
+
     return (
       <div id={this.state.id} className={ `task container-fluid  rounded-pill  w-100 `} >
 
         {/* Task cotainer */}
         <form className={'row d-flex justify-content-center py-0 px-2 w-100'}
-              tabIndex={'0'} onKeyPress={event => this.submitChanges(event, 'add')}
+              tabIndex={'0'}
+                onBlur={event => this.submitChanges(event, 'add')}
               onSubmit={(event)=> event.preventDefault()}  >
+
+              {/* Bug:
+                1. need  a onKeyPress for enter
+                2. delete update error
+                */}
 
           {/* Completed task checkbox */}
           <div className={'col-1 d-flex justify-content-evenly align-items-center '} >
             <input tabIndex={'0'} type={'checkbox'} name={'complete'}
-            checked={this.state.complete} title={'Task completed'}
+            checked={this.props.complete} title={'Task completed'}
             style={(this.state.task.length >= 1 || !this.state.user_input)? {visibility: 'visible'} : {visibility: 'hidden'} }
-            onChange={event => this.submitChanges(event, 'add')}
+            onChange={(event) => {
+              this.submitChanges(event, 'add')
+            }}
              />
           </div >
 
@@ -90,18 +110,20 @@ class Task extends Component {
               (<input  type={'text'} tabIndex={'0'} value={this.state.task}
                     name={'task'} placeholder={'Task'} className={'fs-6'}
                     title={'Input task'} style={(this.state.complete)? {textDecoration: 'line-through'}:{textDecoration: 'none'}}
-                    onChange={(event) =>{this.changeTask(event.target.value)}}
-                    onBlur={event => this.submitChanges(event, 'add')}
+                    onChange={(event) =>{this.changeTask(event)}}
+
 
                      />):
 
-              (<div tabIndex={'0'} onClick={this.changeElement}>{this.state.task} </div >)
+              (<div tabIndex={'0'} onClick={this.changeElement}
+                    style={(this.state.complete)? {textDecoration: 'line-through'}:{textDecoration: 'none'}}
+              >{this.state.task} </div >)
                   }
           </div >
 
 
           <div className={'col-1'} >
-            <span role={'button'}
+            <span role={'button'} title={'Delete task'}
                   style={(this.state.task.length >= 1 || !this.state.user_input)? {visibility: 'visible'} :
                         {visibility: 'hidden'} }
                   onClick={event => this.submitChanges(event,'remove')}

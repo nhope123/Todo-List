@@ -26,26 +26,20 @@ export const addTask = (taskList, aTask) =>{
   let dupilcate = false
   let list;
 
-  //console.log(`task list: ${JSON.stringify(taskList)} \n new task: ${JSON.stringify(aTask)}`);
-
   if (taskList.length >= 1) {
 
     list = taskList.map((item) => {
                             if (item.id === task_to_add.id) {
                               dupilcate = true;
-                              task_to_add.id = uuidv4();
                               return task_to_add;
                               } else { return item } })
                     if (dupilcate === false) {
-                      task_to_add.id = uuidv4();
                       list.push(task_to_add)
                     }
   } else {
     list = [task_to_add]
   }
-  //console.log(`task update: ${JSON.stringify(list)}`)
   return list
-
 }
 
 /**
@@ -56,7 +50,7 @@ export const addTask = (taskList, aTask) =>{
 * @return {object[]} An updated list with added task.
 */
 export const removeTask = (taskList,taskId) =>{
-  return taskList.filter((item) => {
+  return  taskList.filter((item) => {
     return item.id !== taskId
   })
 }

@@ -4,7 +4,6 @@ import {v4 as uuidv4} from 'uuid';
 
 import Task from './task';
 import {capitalize, addTask, removeTask} from '../redux/helper';
-//import ListItem from '../old_components/item_dif';
 
 class TaskList extends Component {
   constructor(props) {
@@ -17,6 +16,14 @@ class TaskList extends Component {
     }
     this.updateTitle = this.updateTitle.bind(this);
     this.updateTask = this.updateTask.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps,nextState){
+    if (this.state !== nextState) {
+
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -35,16 +42,17 @@ class TaskList extends Component {
   * @param {object} value
   *
   */
-  updateTask = (process,value) =>{
+  updateTask =  (process,value) =>{
     if(process === 'add'){
-      this.setState({task_list: addTask(this.state.task_list,value)});
+       this.setState({task_list: addTask(this.state.task_list,value)});
     }
     else if (process === 'remove') {
-      this.setState({task_list: removeTask(this.state.task_list,value)});
+       this.setState({task_list: removeTask(this.state.task_list,value)});
     }
   }
 
   render() {
+
     const createdlist = this.state.task_list.map((item,index) => {
       return (<Task key={index} {...item} callback={this.updateTask} user_input={false} new_input={false}/>);
     })
