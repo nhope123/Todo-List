@@ -58,20 +58,19 @@ class Task extends Component {
     if ((event.charCode === 13 || process === 'add' || process === 'remove') && this.state.task.length >= 1  ) {
       if(process === 'remove'){
         await this.props.callback(process,this.state.id);
-
       }
       else {
-
         await  this.props.callback(process,{
             ...this.state,
             [event.target.name]: (event.target.name === 'complete')?
                                 event.target.checked: this.state.task,
             user_input: false,
         });
-      }
-      (!this.props.new_input)?
-      (this.setState( ()=>({id: this.props.id,complete: this.props.complete,task:this.props.task,user_input: this.props.user_input,}))):
-      (this.setState(()=>({id: uuidv4(),complete: false, task:'',user_input: true})))
+
+        (!this.props.new_input)?
+        (this.setState( ()=>({id: this.props.id,complete: this.props.complete,task:this.props.task,user_input: this.props.user_input,}))):
+        (this.setState(()=>({id: uuidv4(),complete: false, task:'',user_input: true})))
+      } 
     }
   }
 
@@ -88,7 +87,9 @@ class Task extends Component {
         <form className={'row d-flex justify-content-center py-0 px-2 w-100'}
               tabIndex={'0'}
                 onBlur={event => this.submitChanges(event, 'add')}
-              onSubmit={(event)=> event.preventDefault()}  >
+              onSubmit={(event)=> event.preventDefault()}
+
+               >
 
               {/* Bug:
                 1. need  a onKeyPress for enter
@@ -114,6 +115,13 @@ class Task extends Component {
                     title={'Input task'} style={(this.state.complete)? {textDecoration: 'line-through'}:{textDecoration: 'none'}}
                     onChange={(event) =>{this.changeTask(event)}}
 
+                    onKeyPress={(event)=>{
+                      if(event.charCode === 13){
+                        this.submitChanges(event, 'add')
+                      }
+                    }
+
+                    }
 
                      />):
 
