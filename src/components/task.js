@@ -19,20 +19,22 @@ class Task extends Component {
       complete: this.props.complete,
       task: this.props.task,
       user_input: this.props.user_input,
-      delete: this.props.delete,
     }
 
   }
 
-  shouldComponentUpdate(nextProps,nextState){
-    if(this.props.task !== nextProps.task){
-      return true;
-    }
-    if(this.state.task !== nextState.task){
-      return true;
-    }
+  static propTypes = {
+    id: PropTypes.string,
+    complete: PropTypes.bool,
+    task: PropTypes.string,
+    user_input: PropTypes.bool,
+    new_input: PropTypes.bool,
+    callback: PropTypes.func,
 
-    return false;
+  }
+
+  shouldComponentUpdate(nextProps,nextState){
+    return (this.props !== nextProps || this.state !== nextState )? true : false;
   }
 
   /**
@@ -42,7 +44,7 @@ class Task extends Component {
   */
   changeTask = event =>{
     if (event.charCode === 13) { this.submitChanges(event,'add')  }
-    else if(event.target.value.length < 30) this.setState({ task: capitalize(event.target.value) })
+    else if(event.target.value.length < 30) this.setState(() => ({ task: capitalize(event.target.value) }))
   }
 
   /**
@@ -68,19 +70,19 @@ class Task extends Component {
         });
       }
       (!this.props.new_input)?
-      (this.setState({id: this.props.id,complete: this.props.complete,task:this.props.task,user_input: this.props.user_input,})):
-      (this.setState({id: uuidv4(),complete: false, task:'',user_input: true}))
+      (this.setState( ()=>({id: this.props.id,complete: this.props.complete,task:this.props.task,user_input: this.props.user_input,}))):
+      (this.setState(()=>({id: uuidv4(),complete: false, task:'',user_input: true})))
     }
   }
 
   changeElement = () =>{
-    this.setState({user_input: true})
+    this.setState(()=>({user_input: true}))
   }
 
   render() {
 
     return (
-      <div id={this.state.id} className={ `task container-fluid  rounded-pill  w-100 `} >
+      <div id={this.state.id} className={ `task container-fluid  rounded-pill  w-100 mb-1 `} >
 
         {/* Task cotainer */}
         <form className={'row d-flex justify-content-center py-0 px-2 w-100'}
