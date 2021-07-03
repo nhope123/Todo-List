@@ -22,7 +22,7 @@ export const addTask = (taskList, aTask) => {
   let dupilcate = false
   let list;
 
-  if (taskList.length >= 1) { 
+  if (taskList.length >= 1) {
     list = taskList.map((item) => {
       if (item.id === task_to_add.id) {
         dupilcate = true;

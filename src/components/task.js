@@ -1,16 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-
 import {v4 as uuidv4} from 'uuid';
-
-
 import { capitalize } from '../redux/helper';
 
 class Task extends Component {
-  static propTypes = {
-
-  }
-
   constructor(props) {
     super(props)
 
@@ -20,7 +13,6 @@ class Task extends Component {
       task: this.props.task,
       user_input: this.props.user_input,
     }
-
   }
 
   static propTypes = {
@@ -30,7 +22,6 @@ class Task extends Component {
     user_input: PropTypes.bool,
     new_input: PropTypes.bool,
     callback: PropTypes.func,
-
   }
 
   shouldComponentUpdate(nextProps,nextState){
@@ -68,12 +59,25 @@ class Task extends Component {
         });
 
         (!this.props.new_input)?
-        (this.setState( ()=>({id: this.props.id,complete: this.props.complete,task:this.props.task,user_input: this.props.user_input,}))):
-        (this.setState(()=>({id: uuidv4(),complete: false, task:'',user_input: true})))
-      } 
+          (this.setState( ()=>({
+                                id: this.props.id,
+                                complete: this.props.complete,
+                                task:this.props.task,
+                                user_input: this.props.user_input,
+                              }))):
+          (this.setState(()=>({
+                               id: uuidv4(),
+                               complete: false,
+                               task:'',user_input: true
+                             })))
+      }
     }
   }
 
+  /**
+  * @function changeElement
+  * @description -This function toggles the task from input to display.
+  */
   changeElement = () =>{
     this.setState(()=>({user_input: true}))
   }
@@ -87,20 +91,16 @@ class Task extends Component {
         <form className={'row d-flex justify-content-center py-0 px-2 w-100'}
               tabIndex={'0'}
                 onBlur={event => this.submitChanges(event, 'add')}
-              onSubmit={(event)=> event.preventDefault()}
-
-               >
-
-              {/* Bug:
-                1. need  a onKeyPress for enter
-                2. delete update error
-                */}
+              onSubmit={(event)=> event.preventDefault()} >
 
           {/* Completed task checkbox */}
           <div className={'col-1 d-flex justify-content-evenly align-items-center '} >
             <input tabIndex={'0'} type={'checkbox'} name={'complete'}
             checked={this.props.complete} title={'Task completed'}
-            style={(this.state.task.length >= 1 || !this.state.user_input)? {visibility: 'visible'} : {visibility: 'hidden'} }
+            style={
+                    (this.state.task.length >= 1 || !this.state.user_input)?
+                      {visibility: 'visible'} : {visibility: 'hidden'}
+                    }
             onChange={(event) => {
               this.submitChanges(event, 'add')
             }}
@@ -112,21 +112,26 @@ class Task extends Component {
             { (this.state.user_input)?
               (<input  type={'text'} tabIndex={'0'} value={this.state.task}
                     name={'task'} placeholder={'Task'} className={'fs-6'}
-                    title={'Input task'} style={(this.state.complete)? {textDecoration: 'line-through'}:{textDecoration: 'none'}}
+                    title={'Input task'}
+                    style={
+                            (this.state.complete)?
+                              {textDecoration: 'line-through'}:
+                              {textDecoration: 'none'}
+                          }
                     onChange={(event) =>{this.changeTask(event)}}
-
                     onKeyPress={(event)=>{
                       if(event.charCode === 13){
                         this.submitChanges(event, 'add')
                       }
-                    }
-
-                    }
-
-                     />):
+                    }}
+                  />):
 
               (<div tabIndex={'0'} onClick={this.changeElement}
-                    style={(this.state.complete)? {textDecoration: 'line-through'}:{textDecoration: 'none'}}
+                    style={
+                            (this.state.complete)?
+                              {textDecoration: 'line-through'}:
+                              {textDecoration: 'none'}
+                          }
               >{this.state.task} </div >)
                   }
           </div >
@@ -134,8 +139,10 @@ class Task extends Component {
 
           <div className={'col-1'} >
             <span role={'button'} title={'Delete task'}
-                  style={(this.state.task.length >= 1 || !this.state.user_input)? {visibility: 'visible'} :
-                        {visibility: 'hidden'} }
+                  style={
+                          (this.state.task.length >= 1 || !this.state.user_input)?
+                            {visibility: 'visible'} : {visibility: 'hidden'}
+                          }
                   onClick={event => this.submitChanges(event,'remove')}
                   >&#65049;
             </span >
