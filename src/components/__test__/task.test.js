@@ -28,6 +28,14 @@ describe('Task Component',()=>{
     });
     expect(container.textContent).toContain('Feed the dog');
   });
+  it('Props testing 2',()=>{
+    act(()=>{
+      let taskProps = {id:'6', complete:false, task:'Cook Steak', user_input:false, callback: ()=>{},
+      new_input: true}
+      render(<Task {...taskProps} />,container);
+    });
+    expect(container.textContent).toContain('Cook Steak');
+  });
 
-  
+
 })
