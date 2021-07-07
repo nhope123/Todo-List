@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import {v4 as uuidv4} from 'uuid'; 
+import {v4 as uuidv4} from 'uuid';
 import Task from './task';
 import {capitalize, addTask, removeTask} from '../redux/helper';
+import ColorSelection from './color_selection';
 
 class TaskList extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class TaskList extends Component {
       creation_date: moment().format('ddd, Do MMMM, YYYY'),
       title: '',
       task_list: [],
+      list_color: 'White',
     }
 
   }
@@ -44,11 +46,21 @@ class TaskList extends Component {
       }
   }
 
+  /**
+  * @function colorChange
+  * @description This function sets the color of the task sheet background color.
+  * @param {string} color - A color value
+  */
+  colorChange = (color) =>{
+    this.setState(()=>({list_color: color}))
+  }
+
   render() {
 
     return (
       <div className={'container-fluid d-flex flex-column justify-content-center align-items-center bg-info min-vh-100 '} >
-        <div id={'item-list'} className={'container border  border-radius-6 m-5 p-0 bg-white'}  >
+        <div id={'item-list'} style={{backgroundColor: this.state.list_color}}
+            className={'container border  border-radius-6 m-5 p-0 '}  >
 
           {/* Todo title header */}
           <div id={'item-title'} className={'header w-100  '} >
@@ -56,6 +68,8 @@ class TaskList extends Component {
                    type={'text'} tabIndex={'0'} value={this.state.title}
                    placeholder={'Title'}
                    onChange={(event) =>{this.updateTitle(event.target.value)}}/>
+
+            <ColorSelection callback={this.colorChange} />
           </div >
 
           {/* Todo date */}

@@ -5,10 +5,11 @@
   min-height: 80vh;
   border-radius: 15px;
   .header{
+    @include displayPosition(block,relative);
     @include dimension(100%);
     @include boxShadow(0px 2px 5px rgba(0,0,0,0.2));
     line-height: 2.0;
-
+    z-index: 2;
     border-bottom: 0px solid red;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
@@ -16,7 +17,11 @@
   }
 
   #item-title{
+    @include displayPosition(block,relative);
     input{
+      @include displayPosition(block,relative);
+      position: relative;
+      z-index: 3;
       //font-size: 1.5em;
       font-weight: bold;
       background-color: rgba(0,0,0,0);
@@ -26,6 +31,26 @@
     input:focus{
       border-bottom: 2px solid #e0e0e0;
     }
+    #color-selection{
+      @include displayPosition(block,absolute);
+      @include dimension(4vw,4vw);
+      min-width: 18px;
+      max-width: 24px;
+      top: 0px;
+      right:10px;
+      z-index: 1000;
+      transition-duration: 0.5s;
+      cursor: pointer;
+
+      img{
+        @include dimension(100%);
+
+      }
+    }
+    #color-selection:hover{
+      transform: rotate(720deg);
+    }
+
   }
 
   #date{
