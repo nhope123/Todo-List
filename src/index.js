@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 import './styles/index.css';
 import './styles/item.scss';
+import './styles/react-colorful.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import TaskList from './components/tasklist';

@@ -39,17 +39,22 @@
       top: 0px;
       right:10px;
       z-index: 1000;
-      transition-duration: 0.5s;
+      //transition-duration: 0.5s;
       cursor: pointer;
 
       img{
         @include dimension(100%);
+        transition-duration: 0.5s;
+        transition-timing-function: linear;
+        border-radius: 50%;
 
       }
+      img:hover{
+
+        transform: rotate(720deg);
+      }
     }
-    #color-selection:hover{
-      transform: rotate(720deg);
-    }
+
 
   }
 
@@ -70,8 +75,13 @@
       outline: none;
     }
     input[type='text']:focus{
-      //border-bottom: 2px solid #e0e0e0;
       border:none;
     }
   }
 }
+
+/*
+@keyframes turning-color {
+  from{transform: rotate(0deg);}
+  to{transform: rotate(720deg);}
+}*/
