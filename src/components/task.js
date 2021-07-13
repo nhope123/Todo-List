@@ -85,11 +85,12 @@ class Task extends Component {
   render() {
 
     return (
-      <div id={this.state.id} className={ `task container-fluid  rounded-pill  w-100 mb-1 `} >
+      <div id={this.state.id} data-testid={'task-component'}
+          className={ `task container-fluid  rounded-pill  w-100 mb-1 `} >
 
         {/* Task cotainer */}
         <form className={'row d-flex justify-content-center py-0 px-2 w-100'}
-              tabIndex={'0'}
+              tabIndex={'0'} data-testid={'task-form'} aria-label={'task-form'}
                 onBlur={event => this.submitChanges(event, 'add')}
               onSubmit={(event)=> event.preventDefault()} >
 
@@ -138,7 +139,7 @@ class Task extends Component {
 
 
           <div className={'col-1'} >
-            <span role={'button'} title={'Delete task'}
+            <span role={'button'} title={'Delete task'} data-testid={'delete-task'}
                   style={
                           (this.state.task.length >= 1 || !this.state.user_input)?
                             {visibility: 'visible'} : {visibility: 'hidden'}
