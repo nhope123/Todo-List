@@ -127,7 +127,8 @@ class Task extends Component {
                     }}
                   />):
 
-              (<div tabIndex={'0'} onClick={this.changeElement}
+              (<div tabIndex={'0'} onClick={this.changeElement} data-testid={'input-display'}
+                    role={'document'} id={'input-display'}
                     style={
                             (this.state.complete)?
                               {textDecoration: 'line-through'}:
