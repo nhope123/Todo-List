@@ -15,11 +15,9 @@ describe('Task Component', function () {
   let mockFunc = jest.fn();
 
   describe('Task container testing', function () {
+    let taskProps = Object.assign({},EMPTYTASK,{user_input:false});
 
-    test("Empty empty new task testing", () => {
-      let taskProps = {id:'3', complete:false, task:'', user_input:false,
-                       callback: ()=>{}, new_input: true};
-
+    test("Should have task container", () => {
       render(<Task {...taskProps} />)
       expect(screen.getByTestId('task-component')).toBeInTheDocument();
     });
@@ -38,17 +36,34 @@ describe('Task Component', function () {
 
   });
 
+
+
+
   describe('Checkbox testing ', function () {
 
-    test("Checkbox testing", () => {
-      let taskProps = {id:'3', complete:false, task:'', user_input:false,
-                       callback: ()=>{}, new_input: true};
+    test("Checkbox is checked and task has style line-through", () => {
+      let taskProps = Object.assign({},HAVETASK,{complete: true,});
 
       render(<Task {...taskProps} />)
-      expect(screen.getByRole('checkbox',{name: 'Task completed'})).toBeInTheDocument();
+      // Checkbox is checked
+      expect(screen.getByRole('checkbox',{name: 'Task completed'})).toBeChecked();
+      // Task value has style line-through
+      expect(screen.getByRole('textbox',{name: 'Input task'})).toHaveStyle({'text-decoration': 'line-through'});
+      // Task display is not rendered
+      expect(()=>screen.getByTestId('input-display')).toThrow();
+
+      taskProps = Object.assign({},taskProps,{user_input: false,new_input: false});
+      render(<Task {...taskProps} />)
+      expect(screen.getByRole('document',{name: 'Input display'})).toHaveStyle({'text-decoration': 'line-through'});
+      expect(()=>screen.getByRole('textbox',{name: 'Input task'})).toThrow();
     });
 
   });
+
+
+
+
+
 
   describe('Input testing ', function () {
 
@@ -65,9 +80,9 @@ describe('Task Component', function () {
       // Test for placeholder
       expect(screen.getByPlaceholderText('Task')).toBeInTheDocument();
       // Test that task completion check box is invisible
-      expect(screen.getByTestId('task-complete')).toHaveStyle({visibility: 'hidden',})
+      expect(screen.getByTestId('task-complete')).not.toBeVisible();
       // Test that task delete button is invisible
-      expect(screen.getByTestId('delete-task')).toHaveStyle({visibility: 'hidden',})
+      expect(screen.getByTestId('delete-task')).not.toBeVisible();
     });
 
     test("Input should not be empty with input element", () => {
@@ -82,10 +97,10 @@ describe('Task Component', function () {
       expect(()=>screen.getByRole('document',{name: 'input-display'})).toThrow();
       // Test for placeholder
       expect(screen.getByPlaceholderText('Task')).toBeInTheDocument();
-      // Test that task completion check box is invisible
-      expect(screen.getByTestId('task-complete')).toHaveStyle({visibility: 'visible',})
-      // Test that task delete button is invisible
-      expect(screen.getByTestId('delete-task')).toHaveStyle({visibility: 'visible',})
+      // Test that task completion check box is visible
+      expect(screen.getByTestId('task-complete')).toBeVisible();
+      // Test that task delete button is visible
+      expect(screen.getByTestId('delete-task')).toBeVisible();
     });
 
     test("Input should not be empty with display element", () => {
@@ -100,22 +115,22 @@ describe('Task Component', function () {
       expect(()=>screen.getByRole('document',{name: 'input-display'})).toThrow();
       // Test for placeholder
       expect(()=>screen.getByPlaceholderText('Task')).toThrow();
-      // Test that task completion check box is invisible
-      expect(screen.getByTestId('task-complete')).toHaveStyle({visibility: 'visible',})
-      // Test that task delete button is invisible
-      expect(screen.getByTestId('delete-task')).toHaveStyle({visibility: 'visible',})
+      // Test that task completion check box is visible
+      expect(screen.getByTestId('task-complete')).toBeVisible();
+      // Test that task delete button is visible
+      expect(screen.getByTestId('delete-task')).toBeVisible();
     });
 
     test("Input change", () => {
       let taskProps = Object.assign({}, EMPTYTASK, {callback: mockFunc, task: 'Cook Food',});
 
       render(<Task {...taskProps} />)
-      const input = screen.getByTestId('Input task');
+      const input = screen.queryByTestId('Input task');
       input.setSelectionRange(0,4);
       userEvent.type(input,'{del}Eat')
       console.log(input.value);
       // Test Adding text to input
-      expect(input).toHaveDisplayValue('Eat Food');
+      //expect(input).toHaveDisplayValue('Eat Food');
     });
 
   });
@@ -125,7 +140,7 @@ describe('Task Component', function () {
     // Delete button invisible when task value is an empty string
     test("Delete button is invisible", () => {
       render(<Task {...EMPTYTASK} />)
-      expect(screen.getByTestId('delete-task')).toHaveStyle({visibility: 'hidden'});
+      expect(screen.getByTestId('delete-task')).not.toBeVisible();
       expect(()=>screen.getByRole('button',{name: 'Delete task'})).toThrow();
     });
 
@@ -134,7 +149,7 @@ describe('Task Component', function () {
       render(<Task {...HAVETASK} />)
 
       expect(screen.getByRole('button',{name: 'Delete task'})).toBeInTheDocument();
-      expect(screen.getByTestId('delete-task')).toHaveStyle({visibility: 'visible'});
+      expect(screen.getByTestId('delete-task')).toBeVisible();
     });
 
     // Delete button Event handling
