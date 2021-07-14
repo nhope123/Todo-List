@@ -98,6 +98,7 @@ class Task extends Component {
           <div className={'col-1 d-flex justify-content-evenly align-items-center '} >
             <input tabIndex={'0'} type={'checkbox'} name={'complete'}
             checked={this.props.complete} title={'Task completed'}
+            data-testid={'task-complete'}
             style={
                     (this.state.task.length >= 1 || !this.state.user_input)?
                       {visibility: 'visible'} : {visibility: 'hidden'}
@@ -113,7 +114,7 @@ class Task extends Component {
             { (this.state.user_input)?
               (<input  type={'text'} tabIndex={'0'} value={this.state.task}
                     name={'task'} placeholder={'Task'} className={'fs-6'}
-                    title={'Input task'}
+                    title={'Input task'} data-testid={'Input task'}
                     style={
                             (this.state.complete)?
                               {textDecoration: 'line-through'}:
@@ -128,7 +129,7 @@ class Task extends Component {
                   />):
 
               (<div tabIndex={'0'} onClick={this.changeElement} data-testid={'input-display'}
-                    role={'document'} id={'input-display'}
+                    role={'document'} id={'input-display'} aria-label={'Input display'}
                     style={
                             (this.state.complete)?
                               {textDecoration: 'line-through'}:

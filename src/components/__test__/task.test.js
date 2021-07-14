@@ -52,14 +52,70 @@ describe('Task Component', function () {
 
   describe('Input testing ', function () {
 
-    test("Input  should be empty", () => {
+    test("Input should be empty", () => {
       let taskProps = Object.assign({}, EMPTYTASK, {callback: mockFunc})
 
       render(<Task {...taskProps} />)
+      // Test empty input element is shown
       expect(screen.getByRole('textbox',{name: 'Input task'})).toBeInTheDocument();
+      // Test the element for empty string
       expect(screen.getByRole('textbox',{name: 'Input task'})).toHaveTextContent('');
+      // Test the input display is not shown
       expect(()=>screen.getByRole('document',{name: 'input-display'})).toThrow();
+      // Test for placeholder
+      expect(screen.getByPlaceholderText('Task')).toBeInTheDocument();
+      // Test that task completion check box is invisible
+      expect(screen.getByTestId('task-complete')).toHaveStyle({visibility: 'hidden',})
+      // Test that task delete button is invisible
+      expect(screen.getByTestId('delete-task')).toHaveStyle({visibility: 'hidden',})
+    });
 
+    test("Input should not be empty with input element", () => {
+      let taskProps = Object.assign({}, EMPTYTASK, {callback: mockFunc, task: 'Cook Food'})
+
+      render(<Task {...taskProps} />)
+      // Test input element is shown
+      expect(screen.getByRole('textbox',{name: 'Input task'})).toBeInTheDocument();
+      // Test the element for string content
+      expect(screen.getByRole('textbox',{name: 'Input task'})).toHaveValue('Cook Food');
+      // Test the input display is not shown
+      expect(()=>screen.getByRole('document',{name: 'input-display'})).toThrow();
+      // Test for placeholder
+      expect(screen.getByPlaceholderText('Task')).toBeInTheDocument();
+      // Test that task completion check box is invisible
+      expect(screen.getByTestId('task-complete')).toHaveStyle({visibility: 'visible',})
+      // Test that task delete button is invisible
+      expect(screen.getByTestId('delete-task')).toHaveStyle({visibility: 'visible',})
+    });
+
+    test("Input should not be empty with display element", () => {
+      let taskProps = Object.assign({}, EMPTYTASK, {callback: mockFunc, task: 'Cook Food', user_input: false,});
+
+      render(<Task {...taskProps} />)
+      // Test input element is not shown
+      expect(()=>screen.getByRole('textbox',{name: 'Input task'})).toThrow();
+      // Test the display element for string content
+      expect(screen.getByRole('document',{name: 'Input display'})).toHaveTextContent('Cook Food');
+      // Test the input display is not shown
+      expect(()=>screen.getByRole('document',{name: 'input-display'})).toThrow();
+      // Test for placeholder
+      expect(()=>screen.getByPlaceholderText('Task')).toThrow();
+      // Test that task completion check box is invisible
+      expect(screen.getByTestId('task-complete')).toHaveStyle({visibility: 'visible',})
+      // Test that task delete button is invisible
+      expect(screen.getByTestId('delete-task')).toHaveStyle({visibility: 'visible',})
+    });
+
+    test("Input change", () => {
+      let taskProps = Object.assign({}, EMPTYTASK, {callback: mockFunc, task: 'Cook Food',});
+
+      render(<Task {...taskProps} />)
+      const input = screen.getByTestId('Input task');
+      input.setSelectionRange(0,4);
+      userEvent.type(input,'{del}Eat')
+      console.log(input.value);
+      // Test Adding text to input
+      expect(input).toHaveDisplayValue('Eat Food');
     });
 
   });
