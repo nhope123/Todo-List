@@ -4,6 +4,8 @@ import {v4 as uuidv4} from 'uuid';
 import Task from './task';
 import {capitalize, addTask, removeTask} from '../redux/helper';
 import ColorSelection from './color_selection';
+import colorwheel from '../resources/colorwheel3.png';
+import fontcolor from '../resources/font-color.png';
 
 class TaskList extends Component {
   constructor(props) {
@@ -13,7 +15,7 @@ class TaskList extends Component {
       creation_date: moment().format('ddd, Do MMMM, YYYY'),
       title: '',
       task_list: [],
-      list_color: 'White',
+      list_color: 'rgba( 255 , 255 , 255 , 1 )',
     }
 
   }
@@ -52,14 +54,18 @@ class TaskList extends Component {
   * @param {string} color - A color value
   */
   colorChange = (color) =>{
+    //console.log(`2. Task list Color - change: ${JSON.stringify(color)}`);
     this.setState(()=>({list_color: color}))
   }
 
-  render() {
 
+  render() {
+  /*  let stateColor = this.state.list_color;
+    let bgColor = `rgba(${stateColor[0]},${stateColor[1]},${stateColor[2]},${stateColor[3]})`;
+    console.log('rgba('+ stateColor[0] + ','+ stateColor[1] + ',' + stateColor[2] + ',' + stateColor[3] +')'); */
     return (
       <div className={'container-fluid d-flex flex-column justify-content-center align-items-center bg-info min-vh-100 '} >
-        <div id={'item-list'} style={{backgroundColor: this.state.list_color}}
+        <div id={'item-list'} style={{backgroundColor: this.state.list_color }}
             className={'container border  border-radius-6 m-5 p-0 '}  >
 
           {/* Todo title header */}
@@ -69,7 +75,8 @@ class TaskList extends Component {
                    placeholder={'Title'}
                    onChange={(event) =>{this.updateTitle(event.target.value)}}/>
 
-            <ColorSelection callback={this.colorChange} />
+            <ColorSelection {...{callback:this.colorChange,color: this.state.list_color,
+                                 image: colorwheel, alt:'Colorwheel with 6 different colors' }} />
           </div >
 
           {/* Todo date */}
@@ -100,5 +107,8 @@ class TaskList extends Component {
     )
   }
 }
+
+
+
 
 export default TaskList

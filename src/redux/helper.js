@@ -52,3 +52,25 @@ export const removeTask = (taskList, taskId) => {
     return item.id !== taskId
   })
 }
+
+/**
+* @function rgbaColorString
+* @description This function converts a rgba object to a string rgba value
+* @param {object} color - An object with keys (a, g, b, a) with corresponding number values.
+* @return {string} - A CSS rgba value in the form of a string "rgba( 2, 3, 4, 0.8)"
+*/
+export const rgbaColorString = color => {
+    let opacity = (Object.is(color.a, NaN) || Object.is(color.a, null))? 0: color.a;
+    return `rgba( ${color.r} , ${color.g} , ${color.b} , ${opacity} )`
+  }
+
+/**
+* @function stringToRgbaObject
+* @description This function converts a string rgba value to a rgba object
+* @param {string} color - A CSS rgba value in the form of a string "rgba( 2, 3, 4, 0.8)"
+* @return {object} - An object with keys (a, g, b, a) with corresponding number values.
+*/
+export const stringToRgbaObject = color =>{
+  let colorArray = color.split(' ')
+  return ({r:colorArray[1], g:colorArray[3], b:colorArray[5], a:colorArray[7]})
+}

@@ -39,6 +39,7 @@
       top: 0px;
       right:10px;
       z-index: 1000;
+      border: 1px solid red;
       //transition-duration: 0.5s;
       cursor: pointer;
 
@@ -52,6 +53,13 @@
       img:hover{
 
         transform: rotate(720deg);
+      }
+      img:hover + div{
+        display: block;
+      }
+
+      &:hover .color-selector{
+        display: block;
       }
     }
 

@@ -1,23 +1,20 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import { RgbaColorPicker} from 'react-colorful';
-import colorwheel from '../resources/colorwheel3.png';
 
+import {stringToRgbaObject, rgbaColorString} from '../redux/helper';
 
 class ColorSelection extends Component {
-  changeColor = (event) =>{
-    console.log(event.target);
-    this.props.callback(event)
+  changeColor = (color) =>{
+    this.props.callback(rgbaColorString(color))
   }
   render(){
+
     return (
       <div id={'color-selection'} className={'   '} >
-        <img src={colorwheel}  alt={'Colorwheel with 6 different colors'} />
+        <img src={this.props.image}  alt={this.props.alt} />
         <div className={'color-selector'} >
-          <RgbaColorPicker color={this.props.color} onChange={this.changeColor} />
-
-
-
+          <RgbaColorPicker color={stringToRgbaObject(this.props.color)} onChange={this.changeColor} />
         </div >
       </div >
     )
@@ -27,5 +24,6 @@ class ColorSelection extends Component {
 ColorSelection.propTypes = {
   callback: PropTypes.func.isRequired,
 }
+
 
 export default ColorSelection;
