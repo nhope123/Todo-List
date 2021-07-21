@@ -2,7 +2,9 @@
 
 .color-selector{
   @include displayPosition(none, absolute);
+  top: 29px;
   right: 0px;
+  z-index: 1020;
 
   .react-colorful{
     @include dimension(20%,130px);

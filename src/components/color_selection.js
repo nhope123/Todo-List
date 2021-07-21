@@ -12,7 +12,7 @@ class ColorSelection extends Component {
 
     return (
       <div id={'color-selection'} className={'   '} >
-        <img src={this.props.image}  alt={this.props.alt} />
+        <img src={this.props.image}  alt={this.props.alt} className={(this.props.alt.includes('wheel'))? 'wheel': 'letter'} />
         <div className={'color-selector'} >
           <RgbaColorPicker color={stringToRgbaObject(this.props.color)} onChange={this.changeColor} />
         </div >

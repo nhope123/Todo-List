@@ -12,6 +12,7 @@ class Task extends Component {
       complete: this.props.complete,
       task: this.props.task,
       user_input: this.props.user_input,
+      style: this.props.style,
     }
   }
 
@@ -83,10 +84,16 @@ class Task extends Component {
   }
 
   render() {
+    let decoration = (this.state.complete)? {textDecoration: 'line-through'}:
+                                              {textDecoration: 'none'};
+    let optionDisplay = (this.state.task.length >= 1 || !this.state.user_input)?
+                              {visibility: 'visible'} : {visibility: 'hidden'};
 
     return (
       <div id={this.state.id} data-testid={'task-component'}
-          className={ `task container-fluid  rounded-pill  w-100 mb-1 `} >
+          className={ `task container-fluid  rounded-pill  w-100 mb-1 `}
+          style={{ color: this.state.style}}
+           >
 
         {/* Task cotainer */}
         <form className={'row d-flex justify-content-center py-0 px-2 w-100'}
@@ -98,11 +105,7 @@ class Task extends Component {
           <div className={'col-1 d-flex justify-content-evenly align-items-center '} >
             <input tabIndex={'0'} type={'checkbox'} name={'complete'}
             checked={this.props.complete} title={'Task completed'}
-            data-testid={'task-complete'}
-            style={
-                    (this.state.task.length >= 1 || !this.state.user_input)?
-                      {visibility: 'visible'} : {visibility: 'hidden'}
-                    }
+            data-testid={'task-complete'} style={ optionDisplay }
             onChange={(event) => {
               this.submitChanges(event, 'add')
             }}
@@ -115,11 +118,7 @@ class Task extends Component {
               (<input  type={'text'} tabIndex={'0'} value={this.state.task}
                     name={'task'} placeholder={'Task'} className={'fs-6'}
                     title={'Input task'} data-testid={'Input task'}
-                    style={
-                            (this.state.complete)?
-                              {textDecoration: 'line-through'}:
-                              {textDecoration: 'none'}
-                          }
+                    style={ decoration }
                     onChange={(event) =>{this.changeTask(event)}}
                     onKeyPress={(event)=>{
                       if(event.charCode === 13){
@@ -130,11 +129,7 @@ class Task extends Component {
 
               (<div tabIndex={'0'} onClick={this.changeElement} data-testid={'input-display'}
                     role={'document'} id={'input-display'} aria-label={'Input display'}
-                    style={
-                            (this.state.complete)?
-                              {textDecoration: 'line-through'}:
-                              {textDecoration: 'none'}
-                          }
+                    style={ decoration }
               >{this.state.task} </div >)
                   }
           </div >
@@ -142,10 +137,7 @@ class Task extends Component {
 
           <div className={'col-1'} >
             <span role={'button'} title={'Delete task'} data-testid={'delete-task'}
-                  style={
-                          (this.state.task.length >= 1 || !this.state.user_input)?
-                            {visibility: 'visible'} : {visibility: 'hidden'}
-                          }
+                  style={ optionDisplay }
                   onClick={event => this.submitChanges(event,'remove')}
                   >&#65049;
             </span >
