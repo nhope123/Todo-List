@@ -22,7 +22,6 @@
       @include displayPosition(block,relative);
       position: relative;
       z-index: 3;
-      //font-size: 1.5em;
       font-weight: bold;
       background-color: rgba(0,0,0,0);
       border: none;
@@ -75,11 +74,6 @@
 
     }
 
-
-
-
-
-
   }
 
   #date{
@@ -105,9 +99,3 @@
     }
   }
 }
-
-/*
-@keyframes turning-color {
-  from{transform: rotate(0deg);}
-  to{transform: rotate(720deg);}
-}*/

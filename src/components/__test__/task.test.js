@@ -31,34 +31,86 @@ describe('Task Component', function () {
                        callback: ()=>{}, new_input: true};
 
       render(<Task {...taskProps} />)
+      // Test if form exist
       expect(screen.getByRole('form',{name: 'task-form'})).toBeInTheDocument();
     });
 
   });
 
-
-
-
   describe('Checkbox testing ', function () {
 
-    test("Checkbox is checked and task has style line-through", () => {
-      let taskProps = Object.assign({},HAVETASK,{complete: true,});
+    test("Checkbox interaction", async() => {
+      let taskProps = Object.assign({}, HAVETASK, {callback: mockFunc,complete:true});
 
+      const {getByRole} = render(<Task {...taskProps} />);
+      //screen.debug()
+      const checkbox = screen.getByRole('checkbox')
+      console.log(checkbox.checked);
+      // On click check is checked
+      await userEvent.click(checkbox)
+      console.log(checkbox.checked);
+      expect(checkbox).not.toBeChecked();
+      // On click check is unchecked
+      await userEvent.click(checkbox)
+      console.log(checkbox.checked);
+      expect(checkbox).toBeChecked();
+    });
+
+    test("Checkbox is checked and task input has style line-through", () => {
+      let taskProps = Object.assign({},HAVETASK,{complete: true,});
       render(<Task {...taskProps} />)
+
       // Checkbox is checked
       expect(screen.getByRole('checkbox',{name: 'Task completed'})).toBeChecked();
       // Task value has style line-through
       expect(screen.getByRole('textbox',{name: 'Input task'})).toHaveStyle({'text-decoration': 'line-through'});
       // Task display is not rendered
       expect(()=>screen.getByTestId('input-display')).toThrow();
-
-      taskProps = Object.assign({},taskProps,{user_input: false,new_input: false});
+    });
+    test("Checkbox is checked and task display has style line-through", () => {
+      let taskProps = Object.assign({},HAVETASK,{complete: true,user_input: false,new_input: false});
       render(<Task {...taskProps} />)
+
+      // Checkbox is checked
+      expect(screen.getByRole('checkbox',{name: 'Task completed'})).toBeChecked();
+      // Display text has style line-through
       expect(screen.getByRole('document',{name: 'Input display'})).toHaveStyle({'text-decoration': 'line-through'});
+      // Task display is visible
+      expect(screen.getByRole('document',{name: 'Input display'})).toBeVisible();
+      // Task input is not rendered.
       expect(()=>screen.getByRole('textbox',{name: 'Input task'})).toThrow();
     });
 
+    test("Checkbox is unchecked and task input has style line-through", () => {
+      let taskProps = Object.assign({},HAVETASK,{complete: false,});
+      render(<Task {...taskProps} />)
+
+      // Checkbox is unchecked
+      expect(screen.getByRole('checkbox',{name: 'Task completed'})).not.toBeChecked();
+      // Task value has style line-through
+      expect(screen.getByRole('textbox',{name: 'Input task'})).toHaveStyle({'text-decoration': 'none'});
+      // Task display is not rendered
+      expect(()=>screen.getByTestId('input-display')).toThrow();
+    });
+    test("Checkbox is unchecked and task display has style line-through", () => {
+      let taskProps = Object.assign({},HAVETASK,{complete: false,user_input: false,new_input: false});
+      render(<Task {...taskProps} />)
+
+      // Checkbox is unchecked
+      expect(screen.getByRole('checkbox',{name: 'Task completed'})).not.toBeChecked();
+      // Display text has style line-through
+      expect(screen.getByRole('document',{name: 'Input display'})).toHaveStyle({'text-decoration': 'none'});
+      // Task display is visible
+      expect(screen.getByRole('document',{name: 'Input display'})).toBeVisible();
+      // Task input is not rendered.
+      expect(()=>screen.getByRole('textbox',{name: 'Input task'})).toThrow();
+    });
+
+
+
+
   });
+
 
 
 
@@ -122,18 +174,28 @@ describe('Task Component', function () {
     });
 
     test("Input change", () => {
-      let taskProps = Object.assign({}, EMPTYTASK, {callback: mockFunc, task: 'Cook Food',});
+      let taskProps = Object.assign({}, EMPTYTASK, {callback: mockFunc,});
 
       render(<Task {...taskProps} />)
       const input = screen.queryByTestId('Input task');
-      input.setSelectionRange(0,4);
-      userEvent.type(input,'{del}Eat')
-      console.log(input.value);
+      //input.setSelectionRange(0,4);
+      userEvent.type(input,'Eat')
+      //console.log(input.value);
       // Test Adding text to input
       //expect(input).toHaveDisplayValue('Eat Food');
     });
 
   });
+
+
+
+
+
+
+
+
+
+
 
   describe('Delete testing ', function () {
 
@@ -172,66 +234,3 @@ describe('Task Component', function () {
 
 
 });
-
-
-
-/*
-let container = null;
-
-beforeEach(()=>{
-  // Setup a DOM element as a render target
-  container = document.createElement('div');
-  document.body.appendChild(container);
-});
-
-afterEach(()=>{
-  // Cleanup on exiting
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-})
-
-describe('Task Component',()=>{
-
-  // Testing the Component props
-  describe('Task Props testing', function () {
-
-    it('Props testing: string task',()=>{
-      act(()=>{
-        let taskProps = {id:'3', complete:false, task:'Feed the dog', user_input:false, callback: ()=>{},
-        new_input: true}
-        render(<Task {...taskProps} />,container);
-      });
-      expect(container.textContent).toContain('Feed the dog');
-    });
-
-    it('Props testing: empty string task',()=>{
-      act(()=>{
-        let taskProps = {id:'6', complete:false, task:'', user_input:false, callback: ()=>{},
-        new_input: true}
-        render(<Task {...taskProps} />,container);
-      });
-      expect(container.textContent).toContain('');
-    });
-
-  });
-
-  describe('Element Testing', function () {
-    let props = {id:'6', complete:false, task:'Food', user_input:false, callback: ()=>{},
-    new_input: true}
-
-    test("Task should render", () => {
-      act(()=>{
-        render(<Task {...props} />,container);
-      });
-      console.log(container.querySelector(`[data-test='Task Component']`).textContent);
-      expect(container.querySelector(`[data-test='Task Component']`))
-
-    });
-
-
-  });
-
-
-})
-*/
