@@ -41,13 +41,12 @@
       top: 0px;
       right:10px;
       z-index: 1000;
-      border: 1px solid red;
+
 
       #color-selection{
         @include displayPosition(block,relative);
         //@include dimension(calc(4vw + 2*10px),calc(4vw + 2*10px));
         @include dimension(auto);
-        border: 2px solid blue;
         padding: 5px;
         cursor: pointer;
 
@@ -61,6 +60,9 @@
           //border-radius: 50%;
           margin:  0px auto;
 
+        }
+        .wheel{
+          border-radius: 50%;
         }
         .wheel:hover{ transform: rotate(720deg);  }
         .letter:hover{ transform: scale(1.21);}

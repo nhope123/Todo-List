@@ -9,14 +9,12 @@ import './styles/item.scss';
 import './styles/react-colorful.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import TaskList from './components/tasklist';
-//import App from './App';
-//import App from './app_dif'
+import App from './components/todo-list';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store} >
-      <TaskList />
+      <App />
     </Provider >
   </React.StrictMode>,
   document.getElementById('root')
