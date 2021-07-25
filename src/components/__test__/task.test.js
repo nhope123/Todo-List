@@ -1,7 +1,6 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-//import { act } from 'react-dom/test-utils';
 
 import Task from '../task';
 
@@ -43,17 +42,14 @@ describe('Task Component', function () {
       let taskProps = Object.assign({}, HAVETASK, {callback: mockFunc,complete:true});
 
       const {getByRole} = render(<Task {...taskProps} />);
-      //screen.debug()
-      const checkbox = screen.getByRole('checkbox')
-      console.log(checkbox.checked);
+
+      const checkbox = screen.getByRole('checkbox',{name:'Task completed'})
       // On click check is checked
-      await userEvent.click(checkbox)
-      console.log(checkbox.checked);
-      expect(checkbox).not.toBeChecked();
+      userEvent.click(checkbox)
+      expect(mockFunc).toHaveBeenCalledTimes(1);
       // On click check is unchecked
-      await userEvent.click(checkbox)
-      console.log(checkbox.checked);
-      expect(checkbox).toBeChecked();
+      userEvent.click(checkbox)
+      expect(mockFunc).toHaveBeenCalledTimes(2);
     });
 
     test("Checkbox is checked and task input has style line-through", () => {
@@ -111,12 +107,6 @@ describe('Task Component', function () {
 
   });
 
-
-
-
-
-
-
   describe('Input testing ', function () {
 
     test("Input should be empty", () => {
@@ -173,29 +163,7 @@ describe('Task Component', function () {
       expect(screen.getByTestId('delete-task')).toBeVisible();
     });
 
-    test("Input change", () => {
-      let taskProps = Object.assign({}, EMPTYTASK, {callback: mockFunc,});
-
-      render(<Task {...taskProps} />)
-      const input = screen.queryByTestId('Input task');
-      //input.setSelectionRange(0,4);
-      userEvent.type(input,'Eat')
-      //console.log(input.value);
-      // Test Adding text to input
-      //expect(input).toHaveDisplayValue('Eat Food');
-    });
-
   });
-
-
-
-
-
-
-
-
-
-
 
   describe('Delete testing ', function () {
 

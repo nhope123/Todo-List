@@ -82,7 +82,7 @@ class TaskList extends Component {
           <div id={'item-title'} className={'header w-100  '} >
             <input id={'title-input'} className={'w-100 text-center fs-3 '}
                    type={'text'} tabIndex={'0'} value={this.state.title}
-                   placeholder={'Title'} style={{/* color: this.state.font_color*/}}
+                   placeholder={'Title'} data-testid={'list-title'} title={'title'}
                    onChange={(event) =>{this.updateTitle(event.target.value)}}/>
 
             <div  className={'color-choices'}>
