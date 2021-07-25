@@ -76,7 +76,8 @@ class TaskList extends Component {
     return (
       <div className={'container-fluid d-flex flex-column justify-content-center align-items-center bg-info min-vh-100 '} >
         <div id={'item-list'} style={{backgroundColor: this.state.list_color, color: this.state.font_color}}
-            className={'container border  border-radius-6 m-5 p-0 '}  >
+            className={'container border  border-radius-6 m-5 p-0 '}
+            data-testid={'list container'}>
 
           {/* Todo title header */}
           <div id={'item-title'} className={'header w-100  '} >
@@ -94,7 +95,8 @@ class TaskList extends Component {
           </div >
 
           {/* Todo date */}
-          <div id={'date'} className={'text-center align-middle mt-1 fst-italic'}>
+          <div id={'date'} className={'text-center align-middle mt-1 fst-italic'}
+               aria-label={'creation date'} role={'document'} title={'creation'}>
               {this.state.creation_date}
           </div >
 
@@ -104,7 +106,7 @@ class TaskList extends Component {
               this.state.task_list.map((item,index) => {
                   return (
                           <Task key={item.id} {...item} callback={this.updateTask}
-                                user_input={false} new_input={false} style={{/*this.state.font_color*/}}/>
+                                user_input={false} new_input={false} />
                           );
               })
              }
@@ -115,7 +117,7 @@ class TaskList extends Component {
                                 id: uuidv4(), complete: false, task:'',
                                 user_input: true, callback: this.updateTask,
                                 new_input: true,
-                              }} /> {/*style: this.state.font_color,*/}
+                              }} />
         </div >
       </div >
     )
