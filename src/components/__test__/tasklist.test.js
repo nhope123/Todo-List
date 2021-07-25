@@ -12,6 +12,22 @@ describe('TaskList Component', function () {
 
     const title = screen.getByRole('textbox',{name:'title'})
 
+    // Element existence
+
+    // Element accessibility
+
+    // Element visibility
+
+    // Element content
+
+    // Change element content
+
+
+    
+
+
+
+
     expect(title).toBeInTheDocument()
     expect(title).toBeEmptyDOMElement()
 
