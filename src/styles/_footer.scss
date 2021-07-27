@@ -1,6 +1,7 @@
 @use './mixins' as *;
 
 footer{
+  position: fixed;
   bottom: 10px;
   overflow-x: hidden;
 

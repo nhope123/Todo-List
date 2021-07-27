@@ -1,0 +1,51 @@
+@use './mixins' as *;
+$round-radius: 20px;
+$zeropx: 0px;
+.left-border{
+  border-top-left-radius: $round-radius !important;
+  border-top-right-radius: $zeropx !important;
+}
+.right-border{
+  border-bottom-right-radius: $round-radius !important;
+  border-bottom-left-radius: $zeropx !important;
+}
+
+.card-container{
+  @extend .left-border;
+  @extend .right-border;
+  @include dimension(180px);
+  margin:10px;
+  max-height: 114px;
+  font-family: 'Fredoka One', cursive;
+
+  .card-header{
+    padding: $zeropx;
+    span{
+      margin: $zeropx;
+    }
+  }
+  .card-body{
+    max-height: 62px;
+    font-family: 'Roboto', sans-serif;
+  }
+  .list-group{
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+  }
+
+  .list-group-item{
+    @include dimension(100%,18px);
+    font-size: 12px;
+
+    padding: $zeropx;
+
+    word-wrap: normal;
+    word-break: keep-all;
+
+  }
+  .card-footer{
+    font-size: 9px;
+    padding: .2rem 1rem;
+  }
+}

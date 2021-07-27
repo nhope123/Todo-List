@@ -3,7 +3,7 @@ import {Linkedin, Github} from 'react-bootstrap-icons';
 
 function Footer() {
   return (
-    <footer className={'container-fluid mx-0 px-0 position-absolute '}>
+    <footer className={'container-fluid mx-0 px-0 '}>
       <div className={'container-lg px-0'}>
 
         <div className={'d-flex flex-row justify-content-around align-items-center'} >

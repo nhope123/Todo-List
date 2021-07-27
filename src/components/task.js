@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import {v4 as uuidv4} from 'uuid';
+import {TrashFill} from 'react-bootstrap-icons';
 import { capitalize } from '../redux/helper';
 
 class Task extends Component {
@@ -139,7 +140,8 @@ class Task extends Component {
             <span role={'button'} title={'Delete task'} data-testid={'delete-task'}
                   style={ optionDisplay }
                   onClick={event => this.submitChanges(event,'remove')}
-                  >&#65049;
+                  >
+              <TrashFill className={'trash'} role={'img'} aria-label={'Delete task'}  />
             </span >
           </div >
         </form >
