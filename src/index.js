@@ -4,9 +4,8 @@ import store from './redux/store';
 import {Provider} from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 
-import './styles/index.css';
-import './styles/item.scss';
-import './styles/react-colorful.scss';
+
+import './styles/index.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import App from './components/todo-list';

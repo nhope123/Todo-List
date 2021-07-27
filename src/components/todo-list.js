@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import TaskList from './tasklist'
+import Header from './header'
 
 class App extends Component {
   static propTypes = {
@@ -18,8 +19,8 @@ class App extends Component {
 
   render() {
     return (
-      <div >
-        <div >{'Todo List'}</div >
+      <div className={'container-fluid px-0 vw-100 min-vh-100 border border-secondary'}>
+        <Header />
         <div >{'New List'}</div >
         <div >
 
@@ -27,7 +28,7 @@ class App extends Component {
 
         </div >
         <div >{'Footer'}</div >
-        
+
 
 
 
