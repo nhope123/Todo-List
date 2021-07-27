@@ -1,4 +1,4 @@
-@import './mixins.scss';
+@use './mixins' as *;
 
 #item-list{
   max-width: 550px;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import TaskList from './tasklist'
 import Header from './header'
-
+import Footer from './footer'
 class App extends Component {
   static propTypes = {
 
@@ -19,15 +19,16 @@ class App extends Component {
 
   render() {
     return (
-      <div className={'container-fluid px-0 vw-100 min-vh-100 border border-secondary'}>
+      <div className={'container-fluid px-0 d-block vw-100 min-vh-100 border border-secondary'}>
         <Header />
+
         <div >{'New List'}</div >
         <div >
 
 
 
         </div >
-        <div >{'Footer'}</div >
+        <Footer />
 
 
 

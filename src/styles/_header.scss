@@ -1,1 +1,6 @@
-@import "./mixins.scss";
+@use './mixins' as *;
+
+header{
+  background-color:  #512e2d;
+  color: white;
+}
