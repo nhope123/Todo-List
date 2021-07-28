@@ -1,5 +1,7 @@
 
-const taskSelection =[ {
+const taskSelection =[
+  {
+  id: '1',
   title: 'Grocery Shopping',
   creation_date:  'Thu, 3rd July, 2021',
   task_list: [
@@ -22,7 +24,8 @@ const taskSelection =[ {
   list_color: 'rgba(241, 168, 154, 1)',
   font_color: 'rgba(0,0,0,1)',
 },
- {
+  {
+   id: '2',
   title: 'Grocery Shopping',
   creation_date: 'Thu, 3rd July, 2021',
   task_list: [
@@ -45,7 +48,9 @@ const taskSelection =[ {
   list_color: 'rgba(255, 51, 51, 1)',
   font_color: 'rgba(255,255,255,1)',
 },
-  {title: 'Grocery Shopping',
+  {
+  id: '3',
+  title: 'Grocery Shopping',
   creation_date: 'Thu, 3rd July, 2021',
   task_list: [
     {
@@ -67,7 +72,8 @@ const taskSelection =[ {
   list_color: 'rgba(241, 168, 154, 1)',
   font_color: 'rgba(0,0,0,1)',
 },
- {
+  {
+  id: '4',
   title: 'Grocery Shopping',
   creation_date: 'Thu, 3rd July, 2021',
   task_list: [
@@ -90,7 +96,9 @@ const taskSelection =[ {
   list_color: 'rgba(255, 51, 51, 1)',
   font_color: 'rgba(255,255,255,1)',
 },
-  {title: 'Grocery Shopping',
+  {
+  id: '5',
+  title: 'Grocery Shopping',
   creation_date: 'Thu, 3rd July, 2021',
   task_list: [
     {
@@ -113,6 +121,7 @@ const taskSelection =[ {
   font_color: 'rgba(0,0,0,1)',
 },
  {
+  id: '6',
   title: 'Grocery Shopping',
   creation_date: 'Thu, 3rd July, 2021',
   task_list: [
@@ -135,7 +144,9 @@ const taskSelection =[ {
   list_color: 'rgba(255, 51, 51, 1)',
   font_color: 'rgba(255,255,255,1)',
 },
-  {title: 'Grocery Shopping',
+  {
+    id: '7',
+    title: 'Grocery Shopping',
   creation_date: 'Thu, 3rd July, 2021',
   task_list: [
     {
@@ -158,6 +169,7 @@ const taskSelection =[ {
   font_color: 'rgba(0,0,0,1)',
 },
  {
+   id: '8',
   title: 'Grocery Shopping',
   creation_date: 'Thu, 3rd July, 2021',
   task_list: [

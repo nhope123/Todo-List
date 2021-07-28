@@ -7,6 +7,7 @@ import {bindActionCreators} from 'redux'
 
 import Footer from './footer'
 import Card from './card'
+import { INITIAL_AUTHORED_LIST, editTaskList} from '../redux/listSlice'
 
 
 class HomeScreen extends Component {
@@ -20,7 +21,7 @@ class HomeScreen extends Component {
         <div id={'display'}  className={'container-lg d-flex flex-row flex-wrap position-relative py-3 g-5 align-items-start justify-content-center '}>
 
           {/* Create list button */}
-          <Link to={'/create-list'} >
+          <Link to={'/create-list'} onClick={()=> this.props.editTaskList(INITIAL_AUTHORED_LIST)} >
             <button type={'button'} tabIndex={'0'}
                     className={'create-list-button   p-0'} >
               <PlusCircleFill className={'fs-1 m-0 p-0'} role={'img'} aria-label={'Create a new Todo list'}  />
@@ -29,7 +30,12 @@ class HomeScreen extends Component {
 
           {/* List of cards */}
           {this.props.collection.map((item, index) => {
-            return (<Card key={index} {...item} />)
+            return (
+              <Link to={'/create-list'} key={item.id} className={'text-decoration-none'}
+                    onClick={()=> this.props.editTaskList(item)} >
+                <Card  {...item} />
+              </Link >
+            )
           })}
 
         </div >
@@ -46,4 +52,10 @@ const mapStateToProps = (state) =>{
   }
 }
 
-export default connect(mapStateToProps)(HomeScreen);
+const mapDispatchToProps = dispatch =>{
+  return bindActionCreators({
+    editTaskList,
+  },dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

@@ -12,7 +12,7 @@ class TaskList extends Component {
     super(props)
 
     this.state = {
-      list_id: uuidv4(),
+      id: uuidv4(),
       creation_date: moment().format('ddd, Do MMMM, YYYY'),
       title: '',
       task_list: [],
@@ -85,7 +85,7 @@ class TaskList extends Component {
           <div id={'item-title'} className={'header w-100  '} >
             <input id={'title-input'} className={'w-100 text-center fs-3 '}
                    type={'text'} tabIndex={'0'} value={this.state.title}
-                   placeholder={'Title'} data-testid={'list-title'} title={'title'}
+                   placeholder={'Title'} data-testid={'list-title'} title={'Title'}
                    onChange={(event) =>{this.updateTitle(event.target.value)}}/>
 
             <div  className={'color-choices'}>
@@ -98,7 +98,7 @@ class TaskList extends Component {
 
           {/* Todo date */}
           <div id={'date'} className={'text-center align-middle mt-1 fst-italic'}
-               aria-label={'creation date'} role={'document'} title={'creation'}>
+               aria-label={'creation date'} role={'document'} title={'Creation date'}>
               {this.state.creation_date}
           </div >
 

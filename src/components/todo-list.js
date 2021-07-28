@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import {
   BrowserRouter as Router,
   Switch, Route
@@ -10,17 +9,6 @@ import Header from './header'
 import HomeScreen from './home'
 
 class App extends Component {
-  static propTypes = {
-
-  }
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-
-    }
-  }
 
   render() {
     return (

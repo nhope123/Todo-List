@@ -7,34 +7,54 @@ import {bindActionCreators} from 'redux'
 import {deleteTaskList} from '../redux/listSlice'
 
 class Card extends Component {
+
   static propTypes = {
-    list_id: PropTypes.string,
+    id: PropTypes.string,
     creation_date: PropTypes.string,
     title: PropTypes.string,
     task_list: PropTypes.array,
     list_color: PropTypes.string,
     font_color: PropTypes.string,
+    deleteTaskList: PropTypes.func,
   }
 
   render() {
 
     return (
-      <section className={'card card-container'} style={{border: `3px solid ${this.props.list_color}`,backgroundColor: this.props.list_color }} >
+      <section className={'card card-container'}
+               style={{ border: `3px solid ${this.props.list_color}`,
+                        backgroundColor: this.props.list_color }} >
+
         <div className={'card-header left-border d-flex flex-row justify-content-center'}  >
-          <div className={'card-title  m-0'} style={{color: this.props.font_color}} >{this.props.title}</div >
+
+          <div className={'card-title  m-0'} style={{color: this.props.font_color}} >
+            {this.props.title}
+          </div >
+
           <X role={'img'} aria-label={'Delete this list'} tabIndex={'0'}
              className={'fs-6 d-inline-block  delete  position-absolute '}
-             style={{color: this.props.font_color}}  />
+             style={{color: this.props.font_color}}
+             onClick={()=> { this.props.deleteTaskList(this.props.id)
+             }} />
         </div >
+
         <div className={'card-body py-1 px-2 bg-white'} >
           <ul className={'list-group list-group-flush list-style-circle'} >
+
             {this.props.task_list.map((item, index) => {
-              return (<li key={`${index}`} className={'list-group-item'} style={{textDecorationLine: item.complete? 'line-through': 'none' }} >{item.task}</li >)
+              return (<li key={`${index}`} className={'list-group-item'}
+                          style={{textDecorationLine: item.complete? 'line-through': 'none' }} >
+                          {item.task}
+                      </li >)
             })}
 
           </ul >
         </div >
-        <div className={'card-footer right-border text-center'} style={{color: this.props.font_color}} >{this.props.creation_date}</div >
+
+        <div className={'card-footer right-border text-center'}
+             style={{color: this.props.font_color}} >
+          {this.props.creation_date}
+        </div >
 
       </section >
     )
