@@ -1,13 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Knewave&family=Roboto&family=Satisfy&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-/*
-font-family: 'Knewave', cursive;
-font-family: 'Roboto', sans-serif;
-font-family: 'Satisfy', cursive;
-font-family: 'Fredoka One', cursive;
-font-family: 'Pacifico', cursive;
-*/
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Roboto+Slab:wght@300&display=swap');
 
+/*
+  font-family: 'Dancing Script', cursive;
+  font-family: 'Roboto Slab', serif;
+*/
+@mixin dancing-script{
+  font-family: 'Dancing Script', cursive;
+}
 
 @mixin satisfyFont() {
   font-family: 'Satisfy', cursive;

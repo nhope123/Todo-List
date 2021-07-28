@@ -1,0 +1,17 @@
+@use './mixins' as *;
+
+header{
+  position: relative;
+  top: 0px;
+  left: 0;
+  background-color:  #512e2d;
+  z-index: 1;
+
+  h2{
+    color: white !important;
+    font-family: 'Pacifico', cursive;
+    position: relative;
+    z-index: 1;
+
+  }
+}

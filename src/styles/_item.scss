@@ -1,8 +1,15 @@
-@import './mixins.scss';
+@use './mixins' as *;
+
+#task-list{
+  @include dimension(100%, calc(100vh - 80px ));
+}
 
 #item-list{
+  @include dimension(95%, 70%);
   max-width: 550px;
-  min-height: 80vh;
+  min-height: 70%;
+  max-height: 90%;
+  //min-height: 80vh;
   border-radius: 15px;
   .header{
     @include displayPosition(block,relative);
@@ -41,13 +48,12 @@
       top: 0px;
       right:10px;
       z-index: 1000;
-      border: 1px solid red;
+
 
       #color-selection{
         @include displayPosition(block,relative);
         //@include dimension(calc(4vw + 2*10px),calc(4vw + 2*10px));
         @include dimension(auto);
-        border: 2px solid blue;
         padding: 5px;
         cursor: pointer;
 
@@ -62,6 +68,9 @@
           margin:  0px auto;
 
         }
+        .wheel{
+          border-radius: 50%;
+        }
         .wheel:hover{ transform: rotate(720deg);  }
         .letter:hover{ transform: scale(1.21);}
 
@@ -69,8 +78,6 @@
           display: block;
         }
       }
-
-
 
     }
 
@@ -96,6 +103,14 @@
     }
     input[type='text']:focus{
       border:none;
+    }
+  }
+
+  .trash{
+
+    &:hover{
+      transform: scale(1.1);
+      opacity: 0.8;
     }
   }
 }

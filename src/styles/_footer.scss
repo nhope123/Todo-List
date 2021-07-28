@@ -1,0 +1,23 @@
+@use './mixins' as *;
+
+footer{
+  position: sticky;
+  bottom: 10px;
+  overflow-x: hidden;
+
+  .link{
+    color:  #512e2d;
+
+    &:hover{
+      color: #E89675; //#EA6B51;
+      transform: scale(1.1);
+    }
+  }
+  #copyright{
+    @include dancing-script;
+    font-size: 0.8rem;
+    color:  #512e2d;
+    font-weight: bold;
+
+  }
+}

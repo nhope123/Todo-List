@@ -74,7 +74,7 @@ class TaskList extends Component {
     let bgColor = `rgba(${stateColor[0]},${stateColor[1]},${stateColor[2]},${stateColor[3]})`;
     console.log('rgba('+ stateColor[0] + ','+ stateColor[1] + ',' + stateColor[2] + ',' + stateColor[3] +')'); */
     return (
-      <div className={'container-fluid d-flex flex-column justify-content-center align-items-center bg-info min-vh-100 '} >
+      <div id={'task-list'} className={'container-fluid d-flex flex-column justify-content-center align-items-center  '} >
         <div id={'item-list'} style={{backgroundColor: this.state.list_color, color: this.state.font_color}}
             className={'container border  border-radius-6 m-5 p-0 '}
             data-testid={'list container'}>

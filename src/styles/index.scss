@@ -1,13 +1,19 @@
+@use './header';
+@use './item';
+@use './react-colorful';
+@use './footer';
+@use './card';
+@use './home';
+
 body {
   margin: 0;
+  width: 100vw;
+  height: 100vh;
+  
+  background-color: #d6d9d7 !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
