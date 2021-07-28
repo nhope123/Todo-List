@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import {X} from 'react-bootstrap-icons';
 
 const tasks = {
  title: 'Grocery Shopping',
@@ -46,7 +47,10 @@ class Card extends Component {
     return (
       <section className={'card card-container'} style={{border: `3px solid ${this.props.list_color}`,backgroundColor: this.props.list_color }} >
         <div className={'card-header left-border d-flex flex-row justify-content-center'}  >
-          <span className={'card-title '} style={{color: this.props.font_color}} >{this.props.title}</span >
+          <div className={'card-title  m-0'} style={{color: this.props.font_color}} >{this.props.title}</div >
+          <X role={'img'} aria-label={'Delete this list'} tabIndex={'0'}
+             className={'fs-6 d-inline-block  delete  position-absolute '}
+             style={{color: this.props.font_color}}  />
         </div >
         <div className={'card-body py-1 px-2 bg-white'} >
           <ul className={'list-group list-group-flush list-style-circle'} >

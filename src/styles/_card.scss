@@ -16,12 +16,25 @@ $zeropx: 0px;
   @include dimension(180px);
   margin:10px;
   max-height: 114px;
-  font-family: 'Fredoka One', cursive;
+  font-family: 'Roboto Slab', serif;
 
   .card-header{
     padding: $zeropx;
-    span{
-      margin: $zeropx;
+
+    .card-title{
+      font-size: 13px;
+    }
+
+    div{
+
+    }
+    .delete{
+      top: -3px;
+      right: -3px;
+      cursor: pointer;
+      &:hover{
+        transform: scale(0.9);
+      }
     }
   }
   .card-body{
@@ -47,5 +60,6 @@ $zeropx: 0px;
   .card-footer{
     font-size: 9px;
     padding: .2rem 1rem;
+    font-weight:300;
   }
 }
