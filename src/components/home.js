@@ -1,27 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import moment from 'moment'
-import {v4 as uuidv4} from 'uuid'
 import {PlusCircleFill} from 'react-bootstrap-icons';
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 
 import Footer from './footer'
 import Card from './card'
-import taskSelection from './helper-list'
-import TaskList from './tasklist'
 
 
 class HomeScreen extends Component {
   static propTypes = {
-
-  }
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-
-    }
+    collection: PropTypes.array,
   }
 
   render() {
@@ -38,7 +28,7 @@ class HomeScreen extends Component {
           </Link >
 
           {/* List of cards */}
-          {taskSelection.map((item, index) => {
+          {this.props.collection.map((item, index) => {
             return (<Card key={index} {...item} />)
           })}
 
@@ -50,4 +40,10 @@ class HomeScreen extends Component {
   }
 }
 
-export default HomeScreen
+const mapStateToProps = (state) =>{
+  return {
+    collection: state.todolist.todo_Collection,
+  }
+}
+
+export default connect(mapStateToProps)(HomeScreen);

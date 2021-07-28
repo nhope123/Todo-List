@@ -74,3 +74,7 @@ export const stringToRgbaObject = color =>{
   let colorArray = color.split(' ')
   return ({r:colorArray[1], g:colorArray[3], b:colorArray[5], a:colorArray[7]})
 }
+
+export const removeTaskList = (list, id) =>{
+  
+}

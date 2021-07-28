@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+  import React, { Component } from 'react';
 import moment from 'moment';
 import {v4 as uuidv4} from 'uuid';
 import Task from './task';
@@ -12,6 +12,7 @@ class TaskList extends Component {
     super(props)
 
     this.state = {
+      list_id: uuidv4(),
       creation_date: moment().format('ddd, Do MMMM, YYYY'),
       title: '',
       task_list: [],
@@ -70,6 +71,7 @@ class TaskList extends Component {
 
 
   render() {
+
   /*  let stateColor = this.state.list_color;
     let bgColor = `rgba(${stateColor[0]},${stateColor[1]},${stateColor[2]},${stateColor[3]})`;
     console.log('rgba('+ stateColor[0] + ','+ stateColor[1] + ',' + stateColor[2] + ',' + stateColor[3] +')'); */

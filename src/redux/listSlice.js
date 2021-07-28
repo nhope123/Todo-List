@@ -1,5 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {capitalize, addTask} from './helper'
+import {removeTaskList} from './helper'
+
+import taskSelection from './todo-sample'
 
 /**
 * @constant
@@ -10,9 +12,7 @@ import {capitalize, addTask} from './helper'
 * @property {object[]} todo_list - An array of task objects
 */
 const initialState = {
-  creation_date: '',
-  title: '',
-  todo_list:[],
+  todo_Collection: [...taskSelection],
 }
 
 
@@ -20,51 +20,22 @@ const listSlice = createSlice({
   name: 'list',
   initialState,
   reducers: {
-
-    /**
-    * @function inputChange
-    * @description An action which takes an array containing a string label and a new value.
-    * @param {string[]} value Contains two properties to update the state.
-    * @property {string} value[0] - The first element is a string label identifying
-    * the state to be updated (creation_date or title state).
-    * @property {string} value[1] -The second element is a string value of a title
-    * or the creation date of the list.
-    * @example
-    * inputChange(['creation_date','Thur, 14th Jan, 2021']);
-    */
-    inputChange: {
-      reducer: (state,action) =>{
-        state.[action.payload[0]] = (action.payload[0] === 'title' && action.payload[1].length < 25)?
-                                      capitalize(action.payload[1]) : action.payload[1]
+    deleteTaskList: {
+      reducer: (state, action) =>{
+        state.todo_Collection = removeTaskList(state.todo_Collection, action.payload)
       },
-      prepare: value =>{
-        return {payload: value};
-      },
-    },
-
-    /**
-    * @function updateTask
-    * @description An action which takes an object containing a task and add it to the list of created tasks.
-    * @param {object} value Contains three properties to update the state.
-    * @property {number} id - A unique uuid number.
-    * @property {bool} complete - The task completion status.
-    * @property {string} task - The task to be added to the task list.
-    * @example
-    * updateTask({id: 2362, complete: true, task: 'Read a book'})
-    */
-    updateTask: {
-      reducer: (state,action)=>{
-        state.todo_list = addTask(state.todo_list,action.payload)
-      },
-      prepare: (value)=>{
-        return {payload: value};
-      },
+      prepare: id => {
+        return {payload: id}
+      }
     }
+
+
+
   },
   extraReducers:{
 
   }
 })
 
-export const {inputChange,updateTask} = listSlice.actions;
+export const { deleteTaskList } = listSlice.actions;
 export default listSlice.reducer;

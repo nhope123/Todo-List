@@ -1,48 +1,22 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {X} from 'react-bootstrap-icons';
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 
-const tasks = {
- title: 'Grocery Shopping',
- creation_date: 'Thu, 1 July,2021',
- task_list: [
-   {
-     id: '8774',
-     complete: false,
-     task: '2pk White Bread',
-   },
-   {
-     id: '2133',
-     complete: true,
-     task: '1pk Sugar Cookies',
-   },
-   {
-     id: '328',
-     complete: false,
-     task: 'Orange Juice',
-   },
- ],
- list_color: 'rgba(255, 51, 51, 1)',
- font_color: 'rgba(255,255,255,1)',
-}
-
+import {deleteTaskList} from '../redux/listSlice'
 
 class Card extends Component {
   static propTypes = {
-
-  }
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-
-    }
+    list_id: PropTypes.string,
+    creation_date: PropTypes.string,
+    title: PropTypes.string,
+    task_list: PropTypes.array,
+    list_color: PropTypes.string,
+    font_color: PropTypes.string,
   }
 
   render() {
-
-
 
     return (
       <section className={'card card-container'} style={{border: `3px solid ${this.props.list_color}`,backgroundColor: this.props.list_color }} >
@@ -67,4 +41,10 @@ class Card extends Component {
   }
 }
 
-export default Card
+const mapDispatchToProps = dispatch =>{
+  return bindActionCreators({
+    deleteTaskList,
+  },dispatch)
+}
+
+export default connect(null,mapDispatchToProps)(Card)
