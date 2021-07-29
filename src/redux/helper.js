@@ -89,14 +89,19 @@ export const updateCollection = (list, value, option) =>{
   let collection;
 
   if(option === 'add-list'){
+    let duplicate = false;
     collection = list.map((item, i) => {
-      return (item.id === value.id)? value: item;
+      if(item.id === value.id){
+        duplicate = true;
+        return value
+      }else{ return item;}
     });
+    if(!duplicate) collection.push(value)
   }
   else if (option === 'delete-list') {
     collection = removeTask(list, value)
   }
-
+  console.log(JSON.stringify(collection));
   localStorage.setItem('task-collection', JSON.stringify(collection));
   return collection;
 }

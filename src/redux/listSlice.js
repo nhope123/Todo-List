@@ -51,6 +51,7 @@ const listSlice = createSlice({
         state.authored_list = INITIAL_AUTHORED_LIST;
       },
       prepare: (value, option) =>{
+        console.log(JSON.stringify(value));
         return {payload: [value, option]}
       }
     }

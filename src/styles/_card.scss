@@ -40,23 +40,26 @@ $zeropx: 0px;
   .card-body{
     max-height: 62px;
     font-family: 'Roboto', sans-serif;
-  }
-  .list-group{
-    overflow: hidden;
-    text-overflow: ellipsis;
+
+    .list-group{
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      .list-group-item{
+        @include dimension(100%,18px);
+        font-size: 12px;
+
+        padding: $zeropx;
+
+        word-wrap: normal;
+        word-break: keep-all;
+
+      }
+    }
+
 
   }
 
-  .list-group-item{
-    @include dimension(100%,18px);
-    font-size: 12px;
-
-    padding: $zeropx;
-
-    word-wrap: normal;
-    word-break: keep-all;
-
-  }
   .card-footer{
     font-size: 9px;
     padding: .2rem 1rem;

@@ -119,7 +119,7 @@ class TaskList extends Component {
           </div >
 
           {/* Todo list */}
-          <div >
+          <div className={'overflow-auto'} >
             {
               this.state.task_list.map((item,index) => {
                   return (

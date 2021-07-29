@@ -12,12 +12,15 @@ import { updateTaskList } from '../redux/listSlice'
   static propTypes = { updateTaskList: PropTypes.func, }
 
   render() {
+
     return (
       <div>
         <Link to={'/'} onClick={()=> this.props.updateTaskList('','clear-list')} title={'Add to trash'} >
           <XLg className={'fs-3 text-danger me-2'} title={'Add to trash'} role={'img'} aria-label={'Add to trash'}/>
         </Link >
-        <Link to={'/'} onClick={()=> this.props.updateTaskList(this.props.list, 'add-list')} title={'Save list'} >
+        <Link to={'/'} onClick={()=> {
+          console.log(JSON.stringify(this.props.list));
+          this.props.updateTaskList(this.props.list, 'add-list')}} title={'Save list'} >
           <CheckLg className={'fs-3 text-primary ms-2'}  role={'img'} aria-label={'Save list'}/>
         </Link >
       </div>

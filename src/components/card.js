@@ -28,7 +28,7 @@ class Card extends Component {
 
         <div className={'card-header left-border d-flex flex-row justify-content-center'}  >
 
-          <div className={'card-title  m-0'} style={{color: this.props.font_color}} >
+          <div className={'card-title  m-0 text-truncate fw-bold '} style={{color: this.props.font_color}} >
             {this.props.title}
           </div >
 
@@ -42,11 +42,11 @@ class Card extends Component {
         <Link to={'/create-list'}  className={'text-decoration-none'}
               onClick={()=> this.props.editTaskList(this.props)} >
 
-          <div className={'card-body py-1 px-2 bg-white'} >
+          <div className={'card-body py-1 px-2 bg-white overflow-hidden'} >
             <ul className={'list-group list-group-flush list-style-circle'} >
 
               {this.props.task_list.map((item, index) => {
-                return (<li key={`${index}`} className={'list-group-item'}
+                return (<li key={`${index}`} className={'list-group-item overflow-hidden text-truncate'}
                             style={{textDecorationLine: item.complete? 'line-through': 'none' }} >
                             {item.task}
                         </li >)
@@ -55,7 +55,7 @@ class Card extends Component {
             </ul >
           </div >
 
-          <div className={'card-footer right-border text-center'}
+          <div className={'card-footer right-border text-center fw-bold'}
                style={{color: this.props.font_color}} >
             {this.props.creation_date}
           </div >
