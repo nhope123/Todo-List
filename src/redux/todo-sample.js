@@ -64,7 +64,7 @@ const taskSelection =[
       task: '1pk Sugar Cookies',
     },
     {
-      id: 923,
+      id: '923',
       complete: false,
       task: 'Orange Juice',
     },
@@ -78,7 +78,7 @@ const taskSelection =[
   creation_date: 'Thu, 3rd July, 2021',
   task_list: [
     {
-      id: 802,
+      id: '802',
       complete: false,
       task: '2pk White Bread',
     },

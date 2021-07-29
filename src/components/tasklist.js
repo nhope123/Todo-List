@@ -1,7 +1,11 @@
   import React, { Component } from 'react';
 import moment from 'moment';
 import {v4 as uuidv4} from 'uuid';
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+
 import Task from './task';
+import ListOptions from './list-option';
 import {capitalize, addTask, removeTask} from '../redux/helper';
 import ColorSelection from './color_selection';
 import colorwheel from '../resources/colorwheel3.png';
@@ -20,6 +24,21 @@ class TaskList extends Component {
       font_color: 'rgba( 0 , 0 , 0 , 1 )',
     }
 
+  }
+
+  componentDidMount(){
+    if(this.props.id !== ''){
+
+      this.setState((state)=>({
+        id: this.props.id,
+        creation_date: this.props.creation_date,
+        title: this.props.title,
+        task_list: this.props.task_list,
+        list_color: this.props.list_color,
+        font_color: this.props.font_color,
+      }))
+
+    }
   }
 
   shouldComponentUpdate(nextProps,nextState){
@@ -72,9 +91,6 @@ class TaskList extends Component {
 
   render() {
 
-  /*  let stateColor = this.state.list_color;
-    let bgColor = `rgba(${stateColor[0]},${stateColor[1]},${stateColor[2]},${stateColor[3]})`;
-    console.log('rgba('+ stateColor[0] + ','+ stateColor[1] + ',' + stateColor[2] + ',' + stateColor[3] +')'); */
     return (
       <div id={'task-list'} className={'container-fluid d-flex flex-column justify-content-center align-items-center  '} >
         <div id={'item-list'} style={{backgroundColor: this.state.list_color, color: this.state.font_color}}
@@ -121,12 +137,23 @@ class TaskList extends Component {
                                 new_input: true,
                               }} />
         </div >
+
+        <ListOptions list={this.state} />
       </div >
     )
   }
 }
 
+const mapStateToProps = state =>{
+  return {
+    id: state.todolist.authored_list.id,
+    creation_date: state.todolist.authored_list.creation_date,
+    title: state.todolist.authored_list.title,
+    task_list: state.todolist.authored_list.task_list,
+    list_color: state.todolist.authored_list.list_color,
+    font_color: state.todolist.authored_list.font_color,
+  }
+}
 
 
-
-export default TaskList
+export default connect(mapStateToProps)(TaskList)

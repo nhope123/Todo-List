@@ -7,7 +7,8 @@ import {bindActionCreators} from 'redux'
 
 import Footer from './footer'
 import Card from './card'
-import { INITIAL_AUTHORED_LIST, editTaskList} from '../redux/listSlice'
+import { editTaskList} from '../redux/listSlice'
+import { INITIAL_AUTHORED_LIST } from '../redux/helper'
 
 
 class HomeScreen extends Component {
@@ -30,12 +31,7 @@ class HomeScreen extends Component {
 
           {/* List of cards */}
           {this.props.collection.map((item, index) => {
-            return (
-              <Link to={'/create-list'} key={item.id} className={'text-decoration-none'}
-                    onClick={()=> this.props.editTaskList(item)} >
-                <Card  {...item} />
-              </Link >
-            )
+            return ( <Card key={item.id} {...item} />  )
           })}
 
         </div >

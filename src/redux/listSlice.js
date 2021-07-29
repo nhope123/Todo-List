@@ -1,14 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {removeTask} from './helper'
+import {removeTask, updateCollection,initializeCollection, INITIAL_AUTHORED_LIST} from './helper'
 
 import taskSelection from './todo-sample'
 
- export const INITIAL_AUTHORED_LIST = {
-  id: '',
-  title: '',
-  creation_date: '',
-  task_list: [],
-};
+
 
 /**
 * @constant
@@ -18,10 +13,9 @@ import taskSelection from './todo-sample'
 * @property {object[]} authored_list - Task list for viewing/editing
 */
 const initialState = {
-  todo_Collection: [...taskSelection],
+  todo_Collection: JSON.parse(initializeCollection()),
   authored_list: INITIAL_AUTHORED_LIST,
 }
-
 
 const listSlice = createSlice({
   name: 'list',
@@ -30,9 +24,8 @@ const listSlice = createSlice({
 
     deleteTaskList: {
       reducer: (state, action) =>{
-        const collection = removeTask(state.todo_Collection, action.payload);
-        localStorage.setItem('task-collection', JSON.stringify(collection))
-        state.todo_Collection = collection;
+
+        state.todo_Collection = updateCollection(state.todo_Collection, action.payload, 'delete-list');
       },
       prepare: id => {
         return {payload: id}
@@ -46,6 +39,20 @@ const listSlice = createSlice({
       prepare: tasklist =>{
         return { payload: tasklist }
       }
+    },
+
+    updateTaskList:{
+      reducer: (state, action) =>{
+        if(action.payload[1] === 'add-list'){
+
+          state.todo_Collection = updateCollection(state.todo_Collection, action.payload[0], action.payload[1]);
+        }
+
+        state.authored_list = INITIAL_AUTHORED_LIST;
+      },
+      prepare: (value, option) =>{
+        return {payload: [value, option]}
+      }
     }
 
 
@@ -55,5 +62,5 @@ const listSlice = createSlice({
   }
 })
 
-export const { deleteTaskList, editTaskList } = listSlice.actions;
+export const { deleteTaskList, editTaskList, updateTaskList } = listSlice.actions;
 export default listSlice.reducer;

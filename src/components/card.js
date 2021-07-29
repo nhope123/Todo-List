@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import {X} from 'react-bootstrap-icons';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
+import {Link} from 'react-router-dom'
 
-import {deleteTaskList} from '../redux/listSlice'
+import {deleteTaskList, editTaskList} from '../redux/listSlice'
 
 class Card extends Component {
 
@@ -38,24 +39,27 @@ class Card extends Component {
              }} />
         </div >
 
-        <div className={'card-body py-1 px-2 bg-white'} >
-          <ul className={'list-group list-group-flush list-style-circle'} >
+        <Link to={'/create-list'}  className={'text-decoration-none'}
+              onClick={()=> this.props.editTaskList(this.props)} >
 
-            {this.props.task_list.map((item, index) => {
-              return (<li key={`${index}`} className={'list-group-item'}
-                          style={{textDecorationLine: item.complete? 'line-through': 'none' }} >
-                          {item.task}
-                      </li >)
-            })}
+          <div className={'card-body py-1 px-2 bg-white'} >
+            <ul className={'list-group list-group-flush list-style-circle'} >
 
-          </ul >
-        </div >
+              {this.props.task_list.map((item, index) => {
+                return (<li key={`${index}`} className={'list-group-item'}
+                            style={{textDecorationLine: item.complete? 'line-through': 'none' }} >
+                            {item.task}
+                        </li >)
+              })}
 
-        <div className={'card-footer right-border text-center'}
-             style={{color: this.props.font_color}} >
-          {this.props.creation_date}
-        </div >
+            </ul >
+          </div >
 
+          <div className={'card-footer right-border text-center'}
+               style={{color: this.props.font_color}} >
+            {this.props.creation_date}
+          </div >
+        </Link >
       </section >
     )
   }
@@ -64,6 +68,7 @@ class Card extends Component {
 const mapDispatchToProps = dispatch =>{
   return bindActionCreators({
     deleteTaskList,
+    editTaskList
   },dispatch)
 }
 
