@@ -16,7 +16,7 @@ const Header = (props) => {
         </div >
 
         {/* Create list button */}
-        { (props.setButton)? <CreateList /> : ''  }
+        { props.setButton && <CreateList />  }
 
       </div>
     </header>
