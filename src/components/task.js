@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import {v4 as uuidv4} from 'uuid';
-import {TrashFill} from 'react-bootstrap-icons';
+import {TrashFill, CheckCircleFill, Circle } from 'react-bootstrap-icons';
 import { capitalize } from '../redux/helper';
 
 class Task extends Component {
@@ -31,6 +31,10 @@ class Task extends Component {
   }
 
   shouldComponentUpdate(nextProps,nextState){
+    if(this.props !== nextProps || this.state !== nextState ){
+      console.log('re-render: ',this.props.id);
+    }
+
     return (this.props !== nextProps || this.state !== nextState )? true : false;
   }
 
@@ -40,7 +44,7 @@ class Task extends Component {
   * @param {string} task - The update task string to a maxt length 0f 20 chars.  *
   */
   changeTask = event =>{
-    if (event.charCode === 13) { this.submitChanges(event,'add')  }
+    if (event.keyCode === 13) { this.submitChanges(event,'add')  }
     else if(event.target.value.length < 30) this.setState(() => ({ task: capitalize(event.target.value) }))
   }
 
@@ -54,18 +58,19 @@ class Task extends Component {
     event.preventDefault()
 
     if (this.state.task.length >= 1) {
-      if ((event.charCode === 13 || process === 'add' || process === 'remove')  ) {
+      if ((event.keyCode === 13 || process === 'add' || process === 'remove' || process === 'complete')  ) {
         if(process === 'remove'){
           await this.props.callback(process,this.state.id);
         }
         else {
-          await  this.props.callback(process,{
-              ...this.state,
-              [event.target.name]: (event.target.name === 'complete')?
-                                  event.target.checked: this.state.task,
-              user_input: false,
-          });
-  
+
+          await  this.props.callback('add', {
+                                              ...this.state,
+                                              [ (process === 'complete')? 'complete': event.target.name]:
+                                                 (process === 'complete')? (!this.props.complete ) : this.state.task,
+                                              user_input: false,
+                                            });
+
           (!this.props.new_input)?
             (this.setState( ()=>({
                                   id: this.props.id,
@@ -107,18 +112,20 @@ class Task extends Component {
         <form className={'row d-flex justify-content-center py-0 px-2 w-100'}
               tabIndex={'0'} data-testid={'task-form'} aria-label={'task-form'}
                onBlur={event => this.submitChanges(event, 'add')}
-              onSubmit={(event)=> this.submitChanges(event, 'add') } >
+              onSubmit={(event)=> this.submitChanges(event, 'add') }              
+              >
 
           {/* Completed task checkbox */}
           <div className={'col-1 d-flex justify-content-evenly align-items-center '} >
-            <input tabIndex={'0'} type={'checkbox'} name={'complete'}
-            checked={this.props.complete} title={'Task completed'}
-            data-testid={'task-complete'} style={ optionDisplay }
-            className={'form-check-input'}
-            onChange={(event) => {
-              this.submitChanges(event, 'add')
-            }}
-             />
+            
+            < span role={'button'} tabIndex={'0'} title={''} style={ optionDisplay } name={ 'complete' } 
+                   data-testid={ 'task-complete' } 
+                   onClick={event=> this.submitChanges(event,'complete')} >
+              {
+                (this.props.complete)? <CheckCircleFill className={'fake-checkbox'} /> : <Circle className={'fake-checkbox'} />
+              }
+            </span> 
+            
           </div >
 
           {/* Task input */}
@@ -130,7 +137,7 @@ class Task extends Component {
                     style={ decoration }
                     onChange={(event) =>{this.changeTask(event)}}
                     onKeyPress={(event)=>{
-                      if(event.charCode === 13){
+                      if(event.keyCode === 13){
                         this.submitChanges(event, 'add')
                       }
                     }}
@@ -148,6 +155,7 @@ class Task extends Component {
             <span role={'button'} title={'Delete task'} data-testid={'delete-task'}
                   style={ optionDisplay }
                   onClick={event => this.submitChanges(event,'remove')}
+                  
                   >
               <TrashFill className={'trash'} role={'img'} aria-label={'Delete task'}  />
             </span >
