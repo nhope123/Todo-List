@@ -101,12 +101,11 @@ export const updateCollection = (list, value, option) =>{
   else if (option === 'delete-list') {
     collection = removeTask(list, value)
   }
-  console.log(JSON.stringify(collection));
   localStorage.setItem('task-collection', JSON.stringify(collection));
   return collection;
 }
 
 export const initializeCollection = () =>{
-  let collection = localStorage.getItem('task-collection')
+  let collection = JSON.parse(localStorage.getItem('task-collection'))
   return (collection)? collection: [];
 }

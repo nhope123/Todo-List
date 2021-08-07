@@ -5,11 +5,11 @@
 }
 
 #item-list{
-  @include dimension(95%, 70%);
+  @include dimension(95%, 80%);
   max-width: 550px;
   min-height: 70%;
   max-height: 90%;
-  //min-height: 80vh;
+  margin-bottom: 3%;
   border-radius: 15px;
   .header{
     @include displayPosition(block,relative);
@@ -87,12 +87,19 @@
     font-size: 0.9em;
     color: inherit;
   }
+  #task-array{
+    max-height: 70%;
+    overflow-y: scroll;
+  }
   .task{
     input[type='checkbox']{
       @include dimension(17px,17px);
       cursor: pointer;
-
     }
+    input:checked{
+      background-color: blue ;
+    }
+
     input[type='text']{
       font-size: 13px;
       @include dimension(100%);

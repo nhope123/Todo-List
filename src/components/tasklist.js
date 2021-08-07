@@ -1,8 +1,7 @@
-  import React, { Component } from 'react';
+import React, { Component } from 'react';
 import moment from 'moment';
 import {v4 as uuidv4} from 'uuid';
 import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
 
 import Task from './task';
 import ListOptions from './list-option';
@@ -94,7 +93,7 @@ class TaskList extends Component {
     return (
       <div id={'task-list'} className={'container-fluid d-flex flex-column justify-content-center align-items-center  '} >
         <div id={'item-list'} style={{backgroundColor: this.state.list_color, color: this.state.font_color}}
-            className={'container border  border-radius-6 m-5 p-0 '}
+            className={'container border  border-radius-6  p-0 '}
             data-testid={'list container'}>
 
           {/* Todo title header */}
@@ -119,7 +118,7 @@ class TaskList extends Component {
           </div >
 
           {/* Todo list */}
-          <div className={'overflow-auto'} >
+          <div id={'task-array'} className={'d-block'} >
             {
               this.state.task_list.map((item,index) => {
                   return (

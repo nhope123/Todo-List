@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {removeTask, updateCollection,initializeCollection, INITIAL_AUTHORED_LIST} from './helper'
+import { updateCollection,initializeCollection, INITIAL_AUTHORED_LIST } from './helper'
 
-import taskSelection from './todo-sample'
+//import taskSelection from './todo-sample'
 
 
 
@@ -13,7 +13,7 @@ import taskSelection from './todo-sample'
 * @property {object[]} authored_list - Task list for viewing/editing
 */
 const initialState = {
-  todo_Collection: JSON.parse(initializeCollection()),
+  todo_Collection: initializeCollection(),
   authored_list: INITIAL_AUTHORED_LIST,
 }
 
@@ -34,10 +34,12 @@ const listSlice = createSlice({
 
     editTaskList: {
       reducer: (state, action) =>{
-        state.authored_list = action.payload;
+        state.authored_list = JSON.parse( action.payload );
       },
       prepare: tasklist =>{
-        return { payload: tasklist }
+        console.log(typeof tasklist );
+        
+        return { payload: JSON.stringify( tasklist )}
       }
     },
 
@@ -51,7 +53,6 @@ const listSlice = createSlice({
         state.authored_list = INITIAL_AUTHORED_LIST;
       },
       prepare: (value, option) =>{
-        console.log(JSON.stringify(value));
         return {payload: [value, option]}
       }
     }
