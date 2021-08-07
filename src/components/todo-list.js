@@ -12,16 +12,16 @@ class App extends Component {
 
   render() {
     return (
-      <Router >
+      <Router basename={'/todo-manager/'} >
         <div className={'container-fluid px-0 d-block vw-100 max-vh-100 m-0'}>
           <Header />
           <Switch >
-            <Route exact path={'/'} >
-              <HomeScreen />
-            </Route >
-            <Route path={'/create-list'} >
-              <TaskList />
-            </Route >
+            <Route  path={'/'} exact  component={ HomeScreen } />
+              {/*<HomeScreen />*/}
+            
+            <Route path={'/create-list'}  component={ TaskList } />
+              {/*<TaskList />*/}
+            
           </Switch >
         </div >
       </Router >

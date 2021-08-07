@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {PlusCircleFill} from 'react-bootstrap-icons';
-import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
 import Footer from './footer'
 import Card from './card'
-import { editTaskList} from '../redux/listSlice'
-import { INITIAL_AUTHORED_LIST } from '../redux/helper'
+import { editTaskList, setCreationButton } from '../redux/listSlice'
+
 
 
 class HomeScreen extends Component {
@@ -16,18 +14,18 @@ class HomeScreen extends Component {
     collection: PropTypes.array,
   }
 
+  componentDidMount(){
+    if( ! window.location.href.includes('create-list')){
+      this.props.setCreationButton(true)
+    }
+    
+  }
+
   render() {
+
     return (
       <main className={'container-fluid p-0  '} >
         <div id={'display'}  className={'container-lg d-flex flex-row flex-wrap position-relative py-3 g-5 align-items-start justify-content-center '}>
-
-          {/* Create list button */}
-          <Link to={'/create-list'} onClick={()=> this.props.editTaskList(INITIAL_AUTHORED_LIST)} >
-            <button type={'button'} tabIndex={'0'}
-                    className={'create-list-button   p-0'} >
-              <PlusCircleFill className={'fs-1 m-0 p-0'} role={'img'} aria-label={'Create a new Todo list'}  />
-            </button >
-          </Link >
 
           {/* List of cards */}
           {this.props.collection.map((item, index) => {
@@ -51,6 +49,7 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps = dispatch =>{
   return bindActionCreators({
     editTaskList,
+    setCreationButton,
   },dispatch)
 }
 

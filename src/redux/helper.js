@@ -111,3 +111,11 @@ export const initializeCollection = () =>{
   let collection = JSON.parse(localStorage.getItem('task-collection'))  
   return (collection && collection.length > 0 )? collection: taskSelection;
 }
+
+export const debounce = (callback, delay) => {
+  let timer 
+  return (...args) =>{
+    clearTimeout(timer)
+    timer = setTimeout(()=> callback (...args),delay)
+  }
+}

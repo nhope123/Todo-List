@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import {v4 as uuidv4} from 'uuid';
 import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 
 import Task from './task';
 import ListOptions from './list-option';
@@ -9,6 +10,7 @@ import {capitalize, addTask, removeTask} from '../redux/helper';
 import ColorSelection from './color_selection';
 import colorwheel from '../resources/colorwheel3.png';
 import fontcolor from '../resources/font-color.png';
+import{ setCreationButton } from '../redux/listSlice'
 
 
 class TaskList extends Component {
@@ -27,6 +29,11 @@ class TaskList extends Component {
   }
 
   componentDidMount(){
+
+    if(  window.location.href.includes('create-list')){
+      this.props.setCreationButton(false)
+    }
+
     if(this.props.id !== ''){
 
       this.setState((state)=>({
@@ -75,7 +82,6 @@ class TaskList extends Component {
   * @param {string} color - A color value
   */
    backgroundColorChange = async (color) =>{
-    //console.log(`2. Task list Color - change: ${JSON.stringify(color)}`);
      await this.setState(()=>({list_color: color}))
   }
   /**
@@ -84,7 +90,6 @@ class TaskList extends Component {
   * @param {string} color - A color value
   */
   fontColorChange = (color) =>{
-    //console.log(`2. Task list Color - change: ${JSON.stringify(color)}`);
     this.setState(()=>({font_color: color}))
   }
 
@@ -155,5 +160,11 @@ const mapStateToProps = state =>{
   }
 }
 
+const mapDispatchToProps = dispatch =>{
+  return bindActionCreators({
+    setCreationButton,
+  },dispatch)
+} 
 
-export default connect(mapStateToProps)(TaskList)
+
+export default connect(mapStateToProps, mapDispatchToProps,)(TaskList)

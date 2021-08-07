@@ -12,6 +12,7 @@ import { updateCollection,initializeCollection, INITIAL_AUTHORED_LIST } from './
 const initialState = {
   todo_Collection: initializeCollection(),
   authored_list: INITIAL_AUTHORED_LIST,
+  isButtonVisible: true,
 }
 
 const listSlice = createSlice({
@@ -52,7 +53,15 @@ const listSlice = createSlice({
       prepare: (value, option) =>{
         return {payload: [value, option]}
       }
+    },
+
+    setCreationButton:{
+      reducer: (state, action)=>{
+        state.isButtonVisible = action.payload
+      },
+      prepare:(bool)=> ({payload: bool})
     }
+
 
 
   },
@@ -61,5 +70,5 @@ const listSlice = createSlice({
   }
 })
 
-export const { deleteTaskList, editTaskList, updateTaskList } = listSlice.actions;
+export const { deleteTaskList, editTaskList, updateTaskList, setCreationButton } = listSlice.actions;
 export default listSlice.reducer;

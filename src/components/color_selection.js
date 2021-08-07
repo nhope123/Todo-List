@@ -2,19 +2,11 @@ import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import { RgbaColorPicker} from 'react-colorful';
 
-
-import {stringToRgbaObject, rgbaColorString} from '../redux/helper';
-
-const debounce = (callback, delay) => {
-  let timer 
-  return (...args) =>{
-    clearTimeout(timer)
-    timer = setTimeout(()=> callback (...args),delay)
-  }
-}
+import {stringToRgbaObject, rgbaColorString, debounce} from '../redux/helper';
 
 
 class ColorSelection extends Component {
+
   changeColor = debounce( (color) =>{
     this.props.callback(rgbaColorString(color))
   },20)

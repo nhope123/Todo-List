@@ -24,7 +24,7 @@
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.2"
   },
-  "homepage": "https://nhope123.github.io/todo-manger/",
+  "homepage": "https://nhope123.github.io/todo-manager/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
