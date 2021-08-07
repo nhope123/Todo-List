@@ -30,11 +30,7 @@ class Task extends Component {
 
   }
 
-  shouldComponentUpdate(nextProps,nextState){
-    if(this.props !== nextProps || this.state !== nextState ){
-      console.log('re-render: ',this.props.id);
-    }
-
+  shouldComponentUpdate(nextProps,nextState){    
     return (this.props !== nextProps || this.state !== nextState )? true : false;
   }
 

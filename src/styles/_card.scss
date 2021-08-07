@@ -15,19 +15,17 @@ $zeropx: 0px;
   @extend .right-border;
   @include dimension(180px);
   margin:10px;
-  max-height: 114px;
+  //max-height: 114px;
   font-family: 'Roboto Slab', serif;
 
   .card-header{
     padding: $zeropx;
+    min-height: 15px;
 
     .card-title{
       font-size: 13px;
     }
 
-    div{
-
-    }
     .delete{
       top: -3px;
       right: -3px;
@@ -38,12 +36,14 @@ $zeropx: 0px;
     }
   }
   .card-body{
-    max-height: 62px;
+    max-height: 95px;
     font-family: 'Roboto', sans-serif;
+    overflow-y: scroll;
 
     .list-group{
-      overflow: hidden;
+      overflow: scroll;
       text-overflow: ellipsis;
+      scroll-behavior: smooth;
 
       .list-group-item{
         @include dimension(100%,18px);

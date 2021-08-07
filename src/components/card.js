@@ -43,10 +43,10 @@ class Card extends Component {
               onClick={()=> this.props.editTaskList(this.props)} >
 
           <div className={'card-body py-1 px-2 bg-white overflow-hidden'} >
-            <ul className={'list-group list-group-flush list-style-circle'} >
+            <ul className={'list-group list-group-flush list-style-circle'}  >
 
               {this.props.task_list.map((item, index) => {
-                return (<li key={`${index}`} className={'list-group-item overflow-hidden text-truncate'}
+                return (<li key={`${index}`} className={'list-group-item  text-truncate'}
                             style={{textDecorationLine: item.complete? 'line-through': 'none' }} >
                             {item.task}
                         </li >)

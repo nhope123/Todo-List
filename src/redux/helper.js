@@ -1,3 +1,5 @@
+import taskSelection from './todo-sample'
+
 export const INITIAL_AUTHORED_LIST = {
  id: '',
  title: '',
@@ -106,6 +108,6 @@ export const updateCollection = (list, value, option) =>{
 }
 
 export const initializeCollection = () =>{
-  let collection = JSON.parse(localStorage.getItem('task-collection'))
-  return (collection)? collection: [];
+  let collection = JSON.parse(localStorage.getItem('task-collection'))  
+  return (collection && collection.length > 0 )? collection: taskSelection;
 }

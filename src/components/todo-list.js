@@ -13,7 +13,7 @@ class App extends Component {
   render() {
     return (
       <Router >
-        <div className={'container-fluid px-0 d-block vw-100 max-vh-100 overflow-hidden m-0'}>
+        <div className={'container-fluid px-0 d-block vw-100 max-vh-100 m-0'}>
           <Header />
           <Switch >
             <Route exact path={'/'} >

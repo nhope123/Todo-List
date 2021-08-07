@@ -2,14 +2,30 @@ import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import { RgbaColorPicker} from 'react-colorful';
 
+
 import {stringToRgbaObject, rgbaColorString} from '../redux/helper';
 
-class ColorSelection extends Component {
-  changeColor = (color) =>{
-    this.props.callback(rgbaColorString(color))
+const debounce = (callback, delay) => {
+  let timer 
+  return (...args) =>{
+    clearTimeout(timer)
+    timer = setTimeout(()=> callback (...args),delay)
   }
-  render(){
+}
 
+
+class ColorSelection extends Component {
+  changeColor = debounce( (color) =>{
+    this.props.callback(rgbaColorString(color))
+  },20)
+
+  shouldComponentUpdate(nextProps,nextState){
+    return ((this.props.color !== nextProps.color) )? true : false;
+  }
+
+
+  render(){
+   
     return (
       <div id={'color-selection'} className={'   '} >
         <img src={this.props.image}  alt={this.props.alt} className={(this.props.alt.includes('wheel'))? 'wheel': 'letter'} />

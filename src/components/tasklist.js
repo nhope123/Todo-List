@@ -10,6 +10,7 @@ import ColorSelection from './color_selection';
 import colorwheel from '../resources/colorwheel3.png';
 import fontcolor from '../resources/font-color.png';
 
+
 class TaskList extends Component {
   constructor(props) {
     super(props)
@@ -73,9 +74,9 @@ class TaskList extends Component {
   * @description This function sets the color of the task sheet background color.
   * @param {string} color - A color value
   */
-  backgroundColorChange = (color) =>{
+   backgroundColorChange = async (color) =>{
     //console.log(`2. Task list Color - change: ${JSON.stringify(color)}`);
-    this.setState(()=>({list_color: color}))
+     await this.setState(()=>({list_color: color}))
   }
   /**
   * @function colorChange
@@ -104,9 +105,9 @@ class TaskList extends Component {
                    onChange={(event) =>{this.updateTitle(event.target.value)}}/>
 
             <div  className={'color-choices'}>
-              <ColorSelection {...{callback:this.backgroundColorChange,color: this.state.list_color,
+              <ColorSelection {...{ callback:this.backgroundColorChange, color: this.state.list_color,
                                  image: colorwheel, alt:'Colorwheel with 6 different colors' }} />
-              <ColorSelection {...{callback:this.fontColorChange,color: this.state.font_color,
+              <ColorSelection {...{callback:this.fontColorChange, color: this.state.font_color,
                                  image: fontcolor, alt:'light blue capital A with red underline' }} />
             </div >
           </div >

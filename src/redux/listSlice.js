@@ -1,9 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit'
 import { updateCollection,initializeCollection, INITIAL_AUTHORED_LIST } from './helper'
 
-//import taskSelection from './todo-sample'
-
-
 
 /**
 * @constant
