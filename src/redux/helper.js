@@ -1,3 +1,14 @@
+import taskSelection from './todo-sample'
+
+export const INITIAL_AUTHORED_LIST = {
+ id: '',
+ title: '',
+ creation_date: '',
+ task_list: [],
+ list_color: '',
+ font_color: '',
+};
+
 /**
  * @function capitalize
  * @description This function takes a string an return a a string with the first
@@ -73,4 +84,30 @@ export const rgbaColorString = color => {
 export const stringToRgbaObject = color =>{
   let colorArray = color.split(' ')
   return ({r:colorArray[1], g:colorArray[3], b:colorArray[5], a:colorArray[7]})
+}
+
+
+export const updateCollection = (list, value, option) =>{
+  let collection;
+
+  if(option === 'add-list'){
+    let duplicate = false;
+    collection = list.map((item, i) => {
+      if(item.id === value.id){
+        duplicate = true;
+        return value
+      }else{ return item;}
+    });
+    if(!duplicate) collection.push(value)
+  }
+  else if (option === 'delete-list') {
+    collection = removeTask(list, value)
+  }
+  localStorage.setItem('task-collection', JSON.stringify(collection));
+  return collection;
+}
+
+export const initializeCollection = () =>{
+  let collection = JSON.parse(localStorage.getItem('task-collection'))  
+  return (collection && collection.length > 0 )? collection: taskSelection;
 }
