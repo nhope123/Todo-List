@@ -25,7 +25,7 @@ class ColorSelection extends Component {
 
 
   render(){
-   
+    console.log(JSON.stringify(this.props.color));
     return (
       <div id={'color-selection'} className={'   '} >
         <img src={this.props.image}  alt={this.props.alt} className={(this.props.alt.includes('wheel'))? 'wheel': 'letter'} />
