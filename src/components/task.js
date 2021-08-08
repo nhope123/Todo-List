@@ -20,11 +20,15 @@ class Task extends Component {
   static propTypes = {
     /** Unique number */
     id: PropTypes.string,
-    /** Task completion   */
+    /** Task completion value */
     complete: PropTypes.bool,
+    /** Task value */
     task: PropTypes.string,
+    /** User input focus value */
     user_input: PropTypes.bool,
+    /** New or edited task input value */
     new_input: PropTypes.bool,
+    /** Updates the collection of tasks */
     callback: PropTypes.func,
   }
 
