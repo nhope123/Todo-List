@@ -11,8 +11,7 @@ export const INITIAL_AUTHORED_LIST = {
 
 /**
  * @function capitalize
- * @description This function takes a string an return a a string with the first
- * letter capitalized.
+ * @description This function takes a string an return a a string with the first letter capitalized.
  * @param {string} aString  The string to be capitalized
  * @return {string} A capitalized string
  */
@@ -86,7 +85,13 @@ export const stringToRgbaObject = color =>{
   return ({r:colorArray[1], g:colorArray[3], b:colorArray[5], a:colorArray[7]})
 }
 
-
+/**
+ * 
+ * @param { array } list - Array of objects with 'id' key and unquie value 
+ * @param { object } value - Object with 'id' key and unquie value 
+ * @param { string } option - A string either 'add-list' or 'delete-list'
+ * @returns Array of objects with 'id' key and unquie value 
+ */
 export const updateCollection = (list, value, option) =>{
   let collection;
 
@@ -107,11 +112,21 @@ export const updateCollection = (list, value, option) =>{
   return collection;
 }
 
+/**
+ * 
+ * @returns Array with LocalStorage data 
+ */
 export const initializeCollection = () =>{
   let collection = JSON.parse(localStorage.getItem('task-collection'))  
   return (collection && collection.length > 0 )? collection: taskSelection;
 }
 
+/**
+ * 
+ * @param { function } callback Function for bouncing reduction
+ * @param { number } delay - Milliseconds to prevent the callback from firing
+ * @returns 
+ */
 export const debounce = (callback, delay) => {
   let timer 
   return (...args) =>{
