@@ -10,13 +10,27 @@ import {deleteTaskList, editTaskList} from '../redux/listSlice'
 class Card extends Component {
 
   static propTypes = {
+    /** Unique number */
     id: PropTypes.string,
+    /** Date in format ddd, Do MMMM, YYYY - [ Thu, 3rd July, 1979 ] */
     creation_date: PropTypes.string,
+    /** Title of list, max length 20 char */
     title: PropTypes.string,
+    /** List of task objects */
     task_list: PropTypes.array,
+    /** RGBA color  */
     list_color: PropTypes.string,
+    /** RGBA color  */
     font_color: PropTypes.string,
-    deleteTaskList: PropTypes.func,
+    /** Delete the card */
+    deleteCallback: PropTypes.func,
+    /** Open the card */
+    openCallback: PropTypes.func,
+  }
+
+  static defaultProps = {
+    list_color: 'rgba( 255 , 255 , 255 , 1 )',
+    font_color: 'rgba( 0 , 0 , 0 , 1 )',
   }
 
   render() {
@@ -35,12 +49,12 @@ class Card extends Component {
           <X role={'img'} aria-label={'Delete this list'} tabIndex={'0'}
              className={'fs-6 d-inline-block  delete  position-absolute '}
              style={{color: this.props.font_color}}
-             onClick={()=> { this.props.deleteTaskList(this.props.id)
+             onClick={()=> { this.props.deleteCallback(this.props.id)
              }} />
         </div >
 
         <Link to={'/create-list'}  className={'text-decoration-none'}
-              onClick={()=> this.props.editTaskList(this.props)} >
+              onClick={()=> this.props.openCallback(this.props)} >
 
           <div className={'card-body py-1 px-2 bg-white overflow-hidden'} >
             <ul className={'list-group list-group-flush list-style-circle'}  >
@@ -67,8 +81,8 @@ class Card extends Component {
 
 const mapDispatchToProps = dispatch =>{
   return bindActionCreators({
-    deleteTaskList,
-    editTaskList
+    deleteCallback: deleteTaskList,
+    openCallback: editTaskList,
   },dispatch)
 }
 

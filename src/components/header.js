@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {Link} from 'react-router-dom'
+import PropTypes from 'prop-types'
+
 import CreateList from './CreateList'
 
 const Header = (props) => {
@@ -10,13 +11,14 @@ const Header = (props) => {
       <div className={' container-lg  d-block position-relative'}>
         <div role={'document'} aria-label={'Application header'} title={'Home'}
             className={'col-12 d-flex flex-row justify-content-center align-items-canter'} >
-          <Link to={'/'} className={'text-decoration-none'} >
-            <h2 className={'mb-0'}>{'Todo Manager'}</h2>
-          </Link >
+
+          {/* Company label */}
+          <h2 className={'mb-0'}>{'Todo Manager'}</h2>
+          
         </div >
 
         {/* Create list button */}
-        { props.setButton && <CreateList />  }
+        { props.componentTransition && <CreateList />  }
 
       </div>
     </header>
@@ -26,8 +28,13 @@ const Header = (props) => {
 
 const mapStateToProps = (state) =>{
   return {
-    setButton: state.todolist.isButtonVisible,
+    componentTransition: state.todolist.isButtonVisible,
   }
+}
+
+Header.prototype = {
+  /** Assign component for display */
+  componentTransition: PropTypes.bool,
 }
 
 export default connect(mapStateToProps) (Header)

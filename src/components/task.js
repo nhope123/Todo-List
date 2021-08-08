@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import {v4 as uuidv4} from 'uuid';
 import {TrashFill, CheckCircleFill, Circle } from 'react-bootstrap-icons';
-import { capitalize } from '../redux/helper';
+import { capitalize } from '../resources/helper';
 
 class Task extends Component {
   constructor(props) {
@@ -18,16 +18,14 @@ class Task extends Component {
   }
 
   static propTypes = {
+    /** Unique number */
     id: PropTypes.string,
+    /** Task completion   */
     complete: PropTypes.bool,
     task: PropTypes.string,
     user_input: PropTypes.bool,
     new_input: PropTypes.bool,
     callback: PropTypes.func,
-  }
-
-  componentDidMount(){
-
   }
 
   shouldComponentUpdate(nextProps,nextState){    

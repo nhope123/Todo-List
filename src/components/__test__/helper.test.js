@@ -1,4 +1,4 @@
-import {capitalize, addTask, removeTask} from './helper';
+import { removeTask , capitalize, addTask } from "../../resources/helper";
 
 const INITIAL_TASK = [
   {id:'1', complete:false, task:'Go for a walk', user_input:false},
@@ -7,6 +7,7 @@ const INITIAL_TASK = [
 ];
 const GET_MILK ={id:'4', complete:false, task:'Pick-up milk', user_input:false};
 const COMPLETE_COOK ={id:'2', complete:true, task:'Cook lunch', user_input:false};
+
 
 describe('capitalize()', ()=>{
   test('Capitalize: apples are great',()=>{
@@ -35,7 +36,7 @@ describe('addTask()',()=>{
 
 describe('removeTask()',()=>{
   test("Remove first Task", () => {
-    expect(removeTask(INITIAL_TASK,INITIAL_TASK[0].id)).not.toContain(INITIAL_TASK[0])
+    expect(removeTask (INITIAL_TASK,INITIAL_TASK[0].id)).not.toContain(INITIAL_TASK[0])
   });
   test("Remove a middle Task", () => {
     expect(removeTask(INITIAL_TASK,INITIAL_TASK[1].id)).not.toContain(INITIAL_TASK[1])

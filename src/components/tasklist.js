@@ -6,7 +6,7 @@ import {bindActionCreators} from 'redux'
 
 import Task from './task';
 import ListOptions from './list-option';
-import {capitalize, addTask, removeTask} from '../redux/helper';
+import {capitalize, addTask, removeTask} from '../resources/helper';
 import ColorSelection from './color_selection';
 import colorwheel from '../resources/colorwheel3.png';
 import fontcolor from '../resources/font-color.png';
@@ -111,9 +111,9 @@ class TaskList extends Component {
 
             <div  className={'color-choices'}>
               <ColorSelection {...{ callback:this.backgroundColorChange, color: this.state.list_color,
-                                 image: colorwheel, alt:'Colorwheel with 6 different colors' }} />
+                                 src: colorwheel, alt:'Colorwheel with 6 different colors' }} />
               <ColorSelection {...{callback:this.fontColorChange, color: this.state.font_color,
-                                 image: fontcolor, alt:'light blue capital A with red underline' }} />
+                                 src: fontcolor, alt:'light blue capital A with red underline' }} />
             </div >
           </div >
 

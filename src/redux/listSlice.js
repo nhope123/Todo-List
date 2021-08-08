@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import { updateCollection,initializeCollection, INITIAL_AUTHORED_LIST } from './helper'
+import { updateCollection,initializeCollection, INITIAL_AUTHORED_LIST } from '../resources/helper'
 
 
 /**

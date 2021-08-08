@@ -32,7 +32,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --watch",
     "eject": "react-scripts eject",
-    "styleguide": "styleguidist server",
+    "styleguide": "styleguidist server ",
     "styleguide:build": "styleguidist build"
   },
   "eslintConfig": {

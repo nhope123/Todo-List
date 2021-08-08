@@ -5,20 +5,22 @@ import {bindActionCreators} from 'redux'
 
 import Footer from './footer'
 import Card from './card'
-import { editTaskList, setCreationButton } from '../redux/listSlice'
+import { setCreationButton } from '../redux/listSlice'
 
 
 
 class HomeScreen extends Component {
   static propTypes = {
+    /** List of Card component values */
     collection: PropTypes.array,
+    /** Toogle CreateList component visibility  */
+    callback: PropTypes.func,
   }
 
   componentDidMount(){
     if( ! window.location.href.includes('create-list')){
-      this.props.setCreationButton(true)
-    }
-    
+      this.props.callback(true)
+    }    
   }
 
   render() {
@@ -28,9 +30,10 @@ class HomeScreen extends Component {
         <div id={'display'}  className={'container-lg d-flex flex-row flex-wrap position-relative py-3 g-5 align-items-start justify-content-center '}>
 
           {/* List of cards */}
-          {this.props.collection.map((item, index) => {
-            return ( <Card key={item.id} {...item} />  )
-          })}
+          { this.props.collection.map((item, index) => {
+              return ( <Card key={item.id} {...item} />  )
+            }) 
+          }
 
         </div >
 
@@ -47,9 +50,8 @@ const mapStateToProps = (state) =>{
 }
 
 const mapDispatchToProps = dispatch =>{
-  return bindActionCreators({
-    editTaskList,
-    setCreationButton,
+  return bindActionCreators({ 
+    callback: setCreationButton,
   },dispatch)
 }
 
