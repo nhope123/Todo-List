@@ -220,7 +220,7 @@ const taskSelection =[
   }],
   list_color: 'rgba( 37 , 33 , 37 , 0.95 )',
   font_color: 'rgba( 224 , 204 , 224 , 0.95 )',
-},
+  },
 ];
 
 export default  taskSelection;

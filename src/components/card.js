@@ -42,7 +42,7 @@ class Card extends Component {
 
         <div className={'card-header left-border d-flex flex-row justify-content-center'}  >
 
-          <div className={'card-title  m-0 text-truncate fw-bold '} style={{color: this.props.font_color}} >
+          <div data-testid={ 'card-title' } className={'card-title  m-0 text-truncate fw-bold '} style={{color: this.props.font_color}} >
             {this.props.title}
           </div >
 
@@ -56,7 +56,7 @@ class Card extends Component {
         <Link to={'/create-list'}  className={'text-decoration-none'}
               onClick={()=> this.props.openCallback(this.props)} >
 
-          <div className={'card-body py-1 px-2 bg-white overflow-hidden'} >
+          <div data-testid={ 'card-task-list' } className={'card-body py-1 px-2 bg-white overflow-hidden'} >
             <ul className={'list-group list-group-flush list-style-circle'}  >
 
               {this.props.task_list.map((item, index) => {
@@ -70,7 +70,7 @@ class Card extends Component {
           </div >
 
           <div className={'card-footer right-border text-center fw-bold'}
-               style={{color: this.props.font_color}} >
+               style={{color: this.props.font_color}} data-testid={ 'card-date' } >
             {this.props.creation_date}
           </div >
         </Link >
