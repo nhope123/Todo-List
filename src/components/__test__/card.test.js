@@ -31,22 +31,6 @@ describe('Test for existing element', ()=>{
         expect( screen.getByTestId( 'card-date' )).toBeInTheDocument()
 
     });
-
-    test('should contain element Task view', () => {
-         
-        render( <Provider store={store} >
-                < Router >
-                    <Card {...taskSelection[0]} callback={ mockFunc() } />
-                </Router>          
-            </Provider>   ) 
-
-        userEvent.click( screen.getByRole( 'img', {name: 'Delete this list' }) )
-        expect( screen.getByRole( 'img', {name: 'Delete this list' }) ).toBeCalledTimes( 1 )
-    });
      
 })
 
-// Test close element
-
-
-// Test clange page

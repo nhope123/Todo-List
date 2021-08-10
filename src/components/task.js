@@ -116,11 +116,11 @@ class Task extends Component {
           {/* Completed task checkbox */}
           <div className={'col-1 d-flex justify-content-evenly align-items-center '} >
             
-            < span role={'button'} tabIndex={'0'} title={''} style={ optionDisplay } name={ 'complete' } 
+            < span role={'button'} tabIndex={'0'} title={'Completed task'} style={ optionDisplay } name={ 'complete' } 
                    data-testid={ 'task-complete' } 
                    onClick={event=> this.submitChanges(event,'complete')} >
               {
-                (this.props.complete)? <CheckCircleFill className={'fake-checkbox'} /> : <Circle className={'fake-checkbox'} />
+                (this.props.complete)? <CheckCircleFill className={'fake-checkbox'} data-testid={'checked'} /> : <Circle className={'fake-checkbox'} data-testid={'unchecked'}  />
               }
             </span> 
             

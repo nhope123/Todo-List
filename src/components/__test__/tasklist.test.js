@@ -3,22 +3,27 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent, {specialChars} from '@testing-library/user-event';
 import {logRoles,} from '@testing-library/dom';
 import moment from 'moment';
+import { Provider } from 'react-redux'
+import store from '../../redux/store'
+import { BrowserRouter as Router } from 'react-router-dom' 
 
 import TaskList from '../tasklist';
 
 describe('TaskList Component', function () {
 
-
-
   test("Task list title testing", () => {
-    render(<TaskList />)
-    const title = screen.getByRole('textbox',{name:'title'})
+    
+    render( <Provider store={store} >
+                < Router >
+                <TaskList />
+                </Router>          
+            </Provider>   )
+    const title = screen.getByRole('textbox',{name:'Title'})
 
     // Element existence
     expect(title).toBeInTheDocument()
     // Element accessibility
-    expect(title).toHaveAccessibleDescription('title');
-    expect(title).toHaveAccessibleName('title');
+    expect(title).toHaveAccessibleName('Title');
     // Element visibility
     expect(title).toBeVisible();
     // Element content
@@ -33,12 +38,15 @@ describe('TaskList Component', function () {
   });
 
   test("Creation date testing", () => {
-    render(<TaskList />)
-    const date = screen.getByTitle('creation')
+    render( <Provider store={store} >
+              < Router >
+                <TaskList />
+              </Router>          
+            </Provider>   )
+    const date = screen.getByTitle('Creation date')
     // Element existence
     expect(date).toBeInTheDocument()
     // Element accessibility
-    expect(date).toHaveAccessibleDescription('creation');
     expect(date).toHaveAccessibleName('creation date');
     // Element visibility
     expect(date).toBeVisible();
@@ -47,7 +55,11 @@ describe('TaskList Component', function () {
   });
 
   test("Todo list testing",async () => {
-    render(<TaskList />)
+    render( <Provider store={store} >
+              < Router >
+                <TaskList />
+              </Router>          
+            </Provider>   )
     const input = screen.getByRole('textbox',{name:'Input task'})
     let checkbox;
 
@@ -61,7 +73,7 @@ describe('TaskList Component', function () {
     // Change task input
     userEvent.type(input,'Sleep')
     // Click the checkbox
-    checkbox = screen.getByRole('checkbox',{name: 'Task completed'})
+    checkbox = screen.getByRole('button',{name: 'Completed task'})
     expect(checkbox).not.toBeChecked()
     await userEvent.click(checkbox)
     
