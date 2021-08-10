@@ -11,11 +11,11 @@ function Footer() {
           <div >
             <a href={'https://www.linkedin.com/in/nialhope/'} target={'_top'}
                tabIndex={'0'} title={'Go to Linkedin'}>
-              <Linkedin className={'fs-6 me-1 link '} role={'img'} aria-label={'Go to Linkedin'} />
+              <Linkedin className={'fs-6 mx-2 link '} role={'img'} aria-label={'Go to Linkedin'} />
             </a >
             <a href={'https://github.com/nhope123/todo-list'} target={'_top'}
                tabIndex={'0'} title={'Go to Github repository'}>
-              <Github  className={'fs-6 me-1 link'} role={'img'} aria-label={'Go to Github repository'}  />
+              <Github  className={'fs-6 mx-2 link'} role={'img'} aria-label={'Go to Github repository'}  />
             </a >
           </div >
         </div >

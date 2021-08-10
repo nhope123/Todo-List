@@ -1,6 +1,8 @@
 @use './mixins' as *;
+
 $round-radius: 20px;
 $zeropx: 0px;
+
 .left-border{
   border-top-left-radius: $round-radius !important;
   border-top-right-radius: $zeropx !important;
@@ -15,7 +17,6 @@ $zeropx: 0px;
   @extend .right-border;
   @include dimension(180px);
   margin:10px;
-  //max-height: 114px;
   font-family: 'Roboto Slab', serif;
 
   .card-header{
@@ -30,6 +31,7 @@ $zeropx: 0px;
       top: -3px;
       right: -3px;
       cursor: pointer;
+      
       &:hover{
         transform: scale(0.9);
       }
@@ -48,16 +50,11 @@ $zeropx: 0px;
       .list-group-item{
         @include dimension(100%,18px);
         font-size: 12px;
-
         padding: $zeropx;
-
         word-wrap: normal;
         word-break: keep-all;
-
       }
     }
-
-
   }
 
   .card-footer{

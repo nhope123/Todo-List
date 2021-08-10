@@ -28,7 +28,6 @@
   box-shadow: $value;
 }
 
-// Display flex direction, justify, and align attributes
 @mixin flexAttribute($direction,$justify,$align) {
   flex-direction: $direction;
   justify-content: $justify;

@@ -3,10 +3,11 @@ import moment from 'moment';
 import {v4 as uuidv4} from 'uuid';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
+import PropTypes from 'prop-types'
 
 import Task from './task';
 import ListOptions from './list-option';
-import {capitalize, addTask, removeTask} from '../redux/helper';
+import {capitalize, addTask, removeTask} from '../resources/helper';
 import ColorSelection from './color_selection';
 import colorwheel from '../resources/colorwheel3.png';
 import fontcolor from '../resources/font-color.png';
@@ -25,27 +26,20 @@ class TaskList extends Component {
       list_color: 'rgba( 255 , 255 , 255 , 1 )',
       font_color: 'rgba( 0 , 0 , 0 , 1 )',
     }
-
   }
 
   componentDidMount(){
 
-    if(  window.location.href.includes('create-list')){
-      this.props.setCreationButton(false)
-    }
+    if(  window.location.href.includes('create-list')){ this.props.callback(false) }
 
-    if(this.props.id !== ''){
-
-      this.setState((state)=>({
-        id: this.props.id,
-        creation_date: this.props.creation_date,
-        title: this.props.title,
-        task_list: this.props.task_list,
-        list_color: this.props.list_color,
-        font_color: this.props.font_color,
-      }))
-
-    }
+    (this.props.id !== '') && this.setState((state)=>({
+                                  id: this.props.id,
+                                  creation_date: this.props.creation_date,
+                                  title: this.props.title,
+                                  task_list: this.props.task_list,
+                                  list_color: this.props.list_color,
+                                  font_color: this.props.font_color,
+                                }))    
   }
 
   shouldComponentUpdate(nextProps,nextState){
@@ -58,22 +52,21 @@ class TaskList extends Component {
   * @param {string} value A string of less than 20 char.
   */
   updateTitle =(value)=>{
-    if (value.length < 21) this.setState(() =>({title: capitalize(value) }))
+    (value.length < 21) && this.setState(() =>({title: capitalize(value) }))
   }
 
   /**
   * @function updateTask
   * @description This function updates the task in the task list.
-  * @param {object} value
-  *
+  * @param {object} value 
   */
   updateTask =  (process,value) =>{
-      if(process === 'add'){
-        this.setState( state => ({task_list: addTask(state.task_list,value)}))
-      }
-      else if (process === 'remove'){
-        this.setState( state => ({task_list: removeTask(state.task_list, value)}))
-      }
+    if(process === 'add'){
+      this.setState( state => ({task_list: addTask(state.task_list,value)}))
+    }
+    else if (process === 'remove'){
+      this.setState( state => ({task_list: removeTask(state.task_list, value)}))
+    }
   }
 
   /**
@@ -93,7 +86,6 @@ class TaskList extends Component {
     this.setState(()=>({font_color: color}))
   }
 
-
   render() {
 
     return (
@@ -108,12 +100,16 @@ class TaskList extends Component {
                    type={'text'} tabIndex={'0'} value={this.state.title}
                    placeholder={'Title'} data-testid={'list-title'} title={'Title'}
                    onChange={(event) =>{this.updateTitle(event.target.value)}}/>
-
+            
             <div  className={'color-choices'}>
+
+              {/* Chnage tasklist background color */}
               <ColorSelection {...{ callback:this.backgroundColorChange, color: this.state.list_color,
-                                 image: colorwheel, alt:'Colorwheel with 6 different colors' }} />
+                                 src: colorwheel, alt:'Colorwheel with 6 different colors' }} />
+
+              {/* Chnage tasklist font color */}
               <ColorSelection {...{callback:this.fontColorChange, color: this.state.font_color,
-                                 image: fontcolor, alt:'light blue capital A with red underline' }} />
+                                 src: fontcolor, alt:'light blue capital A with red underline' }} />
             </div >
           </div >
 
@@ -127,12 +123,12 @@ class TaskList extends Component {
           <div id={'task-array'} className={'d-block'} >
             {
               this.state.task_list.map((item,index) => {
-                  return (
-                          <Task key={item.id} {...item} callback={this.updateTask}
-                                user_input={false} new_input={false} />
-                          );
+                return (
+                        <Task key={item.id} {...item} callback={this.updateTask}
+                              user_input={false} new_input={false} />
+                        );
               })
-             }
+            }
           </div >
 
           {/* Intial input task */}
@@ -162,9 +158,25 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch =>{
   return bindActionCreators({
-    setCreationButton,
+    callback: setCreationButton,
   },dispatch)
 } 
 
+TaskList.propTypes = {
+  /** Unique number */
+  id: PropTypes.string,
+  /** Date of TaskList component creation */
+  creation_date: PropTypes.string,
+  /** Name identifier for task list */
+  title: PropTypes.string,
+  /** List of task objects */
+  task_list: PropTypes.array,
+  /** TaskList component background color */
+  list_color: PropTypes.string,
+  /** TaskList component font color */
+  font_color: PropTypes.string,
+  /** Toogle CreateList component visibility  */
+  callback: PropTypes.func,
+} 
 
-export default connect(mapStateToProps, mapDispatchToProps,)(TaskList)
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList)

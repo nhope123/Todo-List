@@ -1,5 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit'
-import { updateCollection,initializeCollection, INITIAL_AUTHORED_LIST } from './helper'
+import { 
+        updateCollection,
+        initializeCollection, 
+        INITIAL_AUTHORED_LIST 
+      } from '../resources/helper'
 
 
 /**
@@ -22,37 +26,27 @@ const listSlice = createSlice({
 
     deleteTaskList: {
       reducer: (state, action) =>{
-
         state.todo_Collection = updateCollection(state.todo_Collection, action.payload, 'delete-list');
       },
-      prepare: id => {
-        return {payload: id}
-      }
+      prepare: id => ( { payload: id } )
     },
 
     editTaskList: {
       reducer: (state, action) =>{
         state.authored_list = JSON.parse( action.payload );
       },
-      prepare: tasklist =>{
-        console.log(typeof tasklist );
-        
-        return { payload: JSON.stringify( tasklist )}
-      }
+      prepare: tasklist => ( { payload: JSON.stringify( tasklist ) } )
     },
 
     updateTaskList:{
       reducer: (state, action) =>{
         if(action.payload[1] === 'add-list'){
-
           state.todo_Collection = updateCollection(state.todo_Collection, action.payload[0], action.payload[1]);
         }
 
         state.authored_list = INITIAL_AUTHORED_LIST;
       },
-      prepare: (value, option) =>{
-        return {payload: [value, option]}
-      }
+      prepare: (value, option) => ( { payload: [value, option] } )
     },
 
     setCreationButton:{
@@ -61,11 +55,6 @@ const listSlice = createSlice({
       },
       prepare:(bool)=> ({payload: bool})
     }
-
-
-
-  },
-  extraReducers:{
 
   }
 })

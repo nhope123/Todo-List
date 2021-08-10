@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.js": "/todo-manager/build/main.5a671afc.js",
+    "runtime-main.js": "/todo-manager/build/bundle.3527ec54.js",
+    "build/2.773d81f8.js": "/todo-manager/build/2.773d81f8.js",
+    "build/2.773d81f8.js.LICENSE.txt": "/todo-manager/build/2.773d81f8.js.LICENSE.txt",
+    "index.html": "/todo-manager/index.html",
+    "static/media/colorwheel3.544e4fd1.png": "/todo-manager/static/media/colorwheel3.544e4fd1.png"
+  },
+  "entrypoints": [
+    "build/bundle.3527ec54.js",
+    "build/2.773d81f8.js",
+    "build/main.5a671afc.js"
+  ]
+}
