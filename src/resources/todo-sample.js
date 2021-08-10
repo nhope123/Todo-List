@@ -1,5 +1,5 @@
 
-const taskSelection =[
+const taskSelection = [
   {
   id: '1',
   title: 'Grocery Shopping',
@@ -26,7 +26,7 @@ const taskSelection =[
 },
   {
    id: '2',
-  title: 'Grocery Shopping',
+  title: 'Well-modulated',
   creation_date: 'Thu, 3rd July, 2021',
   task_list:[{
     "id": "6796853040",
@@ -75,7 +75,7 @@ const taskSelection =[
 },
   {
   id: '3',
-  title: 'Grocery Shopping',
+  title: 'Function',
   creation_date: 'Thu, 3rd July, 2021',
   task_list: [{
     "id": "3863931157",
@@ -91,7 +91,7 @@ const taskSelection =[
 },
   {
   id: '4',
-  title: 'Grocery Shopping',
+  title: '5th generation',
   creation_date: 'Thu, 3rd July, 2021',
   task_list: [{
     "id": "4172904009",
@@ -119,7 +119,7 @@ const taskSelection =[
 },
   {
   id: '5',
-  title: 'Grocery Shopping',
+  title: 'Intranet',
   creation_date: 'Thu, 3rd July, 2021',
   task_list:[{
     "id": "2467379361",
@@ -159,7 +159,7 @@ const taskSelection =[
 },
  {
   id: '6',
-  title: 'Grocery Shopping',
+  title: 'Cross-group',
   creation_date: 'Thu, 3rd July, 2021',
   task_list:[{
     "id": "2654592251",
@@ -175,7 +175,7 @@ const taskSelection =[
 },
   {
     id: '7',
-    title: 'Grocery Shopping',
+    title: 'Interactive',
   creation_date: 'Thu, 3rd July, 2021',
   task_list: [{
     "id": "6708105608",
@@ -195,7 +195,7 @@ const taskSelection =[
 },
  {
    id: '8',
-  title: 'Grocery Shopping',
+  title: 'Vision-oriented',
   creation_date: 'Thu, 3rd July, 2021',
   task_list: [{
     "id": "9185918458",

@@ -30,7 +30,7 @@ class TaskList extends Component {
 
   componentDidMount(){
 
-    (  window.location.href.includes('create-list')) && this.props.callback(false)
+    if(  window.location.href.includes('create-list')){ this.props.callback(false) }
 
     (this.props.id !== '') && this.setState((state)=>({
                                   id: this.props.id,
